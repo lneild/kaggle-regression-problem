@@ -1,0 +1,2778 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>regression_prob</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="regression_prob_files/libs/clipboard/clipboard.min.js"></script>
+<script src="regression_prob_files/libs/quarto-html/quarto.js"></script>
+<script src="regression_prob_files/libs/quarto-html/popper.min.js"></script>
+<script src="regression_prob_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="regression_prob_files/libs/quarto-html/anchor.min.js"></script>
+<link href="regression_prob_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="regression_prob_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="regression_prob_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="regression_prob_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="regression_prob_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score,train_test_split, KFold, cross_val_predict</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error,r2_score,roc_curve,auc,precision_recall_curve, accuracy_score, <span class="op">\</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>recall_score, precision_score, confusion_matrix</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor,DecisionTreeClassifier</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV, ParameterGrid, StratifiedKFold, RandomizedSearchCV</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> VotingRegressor, VotingClassifier, StackingRegressor, StackingClassifier, GradientBoostingRegressor,GradientBoostingClassifier, BaggingRegressor,BaggingClassifier,RandomForestRegressor,RandomForestClassifier,AdaBoostRegressor,AdaBoostClassifier</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression,LogisticRegression, LassoCV, RidgeCV, ElasticNetCV</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools <span class="im">as</span> it</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> time</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xgboost <span class="im">as</span> xgb</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math <span class="im">as</span> math</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./data/train.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(<span class="st">'./data/test.csv'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> train.y</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train.drop(columns<span class="op">=</span>[<span class="st">'y'</span>, <span class="st">'id'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="eda" class="level1">
+<h1>EDA</h1>
+</section>
+<section id="look-at-output-of-y-to-see-if-transformation-is-appropriate" class="level1">
+<h1>Look at output of y to see if transformation is appropriate</h1>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data<span class="op">=</span>y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>&lt;AxesSubplot:xlabel='y', ylabel='Density'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="regression_prob_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>we see it is very skewed, try log transformation</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data<span class="op">=</span>np.log(y_train))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;AxesSubplot:xlabel='y', ylabel='Density'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="regression_prob_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>other possible transformations</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data<span class="op">=</span>np.sqrt(y_train))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>&lt;AxesSubplot:xlabel='y', ylabel='Density'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="regression_prob_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>binning?</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bins, counts <span class="op">=</span> pd.cut(np.square(y_train), <span class="dv">2</span>, retbins<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> np.array(counts)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bins.value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(-8.999, 5000.5]     5332
+(5000.5, 10000.0]      48
+Name: y, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(np.sqrt(y_train))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=</span>counts, ymin<span class="op">=</span><span class="dv">0</span>, ymax<span class="op">=</span><span class="fl">.4</span>, colors<span class="op">=</span><span class="st">'red'</span>, linestyles<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="regression_prob_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">min</span>(y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>1</code></pre>
+</div>
+</div>
+<p>binning doesn’t seem to make sense</p>
+<section id="best-transformation-sqrt-even-though-still-a-bit-skewed-it-is-the-most-normal" class="level3">
+<h3 class="anchored" data-anchor-id="best-transformation-sqrt-even-though-still-a-bit-skewed-it-is-the-most-normal"><em>Best transformation = SQRT even though still a bit skewed, it is the most normal</em></h3>
+</section>
+</section>
+<section id="look-at-x-train-dataset" class="level1">
+<h1>look at x train dataset</h1>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"shape:"</span>, X_train.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>shape: (5380, 765)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cor_lst <span class="op">=</span> np.<span class="bu">abs</span>(X_train.corrwith(y_train)).sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cor_lst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>x146    0.378696
+x102    0.378436
+x014    0.364737
+x581    0.346549
+x619    0.344101
+          ...   
+x465         NaN
+x518         NaN
+x594         NaN
+x643         NaN
+x703         NaN
+Length: 754, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cor_lst[cor_lst.isna()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>x063   NaN
+x137   NaN
+x255   NaN
+x385   NaN
+x405   NaN
+x453   NaN
+x465   NaN
+x518   NaN
+x594   NaN
+x643   NaN
+x703   NaN
+dtype: float64</code></pre>
+</div>
+</div>
+<p>Lots of the correlation coefs are Nan - why?</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X_train.x063.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>0    5380
+Name: x063, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X_train.x137.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>0    5380
+Name: x137, dtype: int64</code></pre>
+</div>
+</div>
+<p>There only value is 0 which is not helpful - drop these values from training</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nan_lst <span class="op">=</span> cor_lst[cor_lst.isna()].index.to_list()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"number of nan predictors:"</span>, <span class="bu">len</span>(nan_lst))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>X_clean <span class="op">=</span> X_train.drop(columns <span class="op">=</span> nan_lst)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_clean.shape)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"dropped columns:"</span>, X_train.shape[<span class="dv">1</span>] <span class="op">-</span> X_clean.shape[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>number of nan predictors: 11
+(5380, 765)
+(5380, 754)
+dropped columns: 11</code></pre>
+</div>
+</div>
+<p>other Nan values in the training data?</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X_clean[X_clean.isna().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>x001</th>
+      <th>x002</th>
+      <th>x003</th>
+      <th>x004</th>
+      <th>x005</th>
+      <th>x006</th>
+      <th>x007</th>
+      <th>x008</th>
+      <th>x009</th>
+      <th>x010</th>
+      <th>...</th>
+      <th>x756</th>
+      <th>x757</th>
+      <th>x758</th>
+      <th>x759</th>
+      <th>x760</th>
+      <th>x761</th>
+      <th>x762</th>
+      <th>x763</th>
+      <th>x764</th>
+      <th>x765</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>3.304810e+09</td>
+      <td>13914.43</td>
+      <td>5.37</td>
+      <td>0.00015</td>
+      <td>1.652405e+09</td>
+      <td>0.00</td>
+      <td>11927742.92</td>
+      <td>1798051.0</td>
+      <td>1051272.0</td>
+      <td>169000000000000000</td>
+      <td>...</td>
+      <td>0.1173</td>
+      <td>0.1136</td>
+      <td>3320000000000</td>
+      <td>0.08</td>
+      <td>661.0</td>
+      <td>0</td>
+      <td>350.0</td>
+      <td>1.5700</td>
+      <td>160.12</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.288000e+10</td>
+      <td>15937.45</td>
+      <td>5.86</td>
+      <td>0.00020</td>
+      <td>2.146667e+09</td>
+      <td>0.00</td>
+      <td>6324375.16</td>
+      <td>1932094.0</td>
+      <td>10055.0</td>
+      <td>37000000000000000</td>
+      <td>...</td>
+      <td>0.3816</td>
+      <td>0.0000</td>
+      <td>348000000000</td>
+      <td>0.25</td>
+      <td>2.0</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>4.5316</td>
+      <td>117.76</td>
+      <td>1.64</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1.282546e+10</td>
+      <td>6215.45</td>
+      <td>6.07</td>
+      <td>0.00040</td>
+      <td>1.832208e+09</td>
+      <td>0.35</td>
+      <td>1509434.16</td>
+      <td>780135.0</td>
+      <td>2408.0</td>
+      <td>950000000000000</td>
+      <td>...</td>
+      <td>0.1514</td>
+      <td>0.0000</td>
+      <td>1760000000000</td>
+      <td>0.26</td>
+      <td>2.0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>5.2293</td>
+      <td>43.30</td>
+      <td>0.95</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1.440000e+11</td>
+      <td>5236.85</td>
+      <td>7.35</td>
+      <td>0.00275</td>
+      <td>5.151139e+09</td>
+      <td>0.26</td>
+      <td>335357.91</td>
+      <td>622837.0</td>
+      <td>32726.0</td>
+      <td>25800000000000</td>
+      <td>...</td>
+      <td>0.6868</td>
+      <td>0.0001</td>
+      <td>34201871001</td>
+      <td>0.87</td>
+      <td>3.0</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>15.9781</td>
+      <td>10.21</td>
+      <td>-0.85</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>5.056351e+09</td>
+      <td>16790.80</td>
+      <td>5.73</td>
+      <td>0.00045</td>
+      <td>1.685450e+09</td>
+      <td>0.47</td>
+      <td>10046694.12</td>
+      <td>2240226.0</td>
+      <td>4842630.0</td>
+      <td>125000000000000000</td>
+      <td>...</td>
+      <td>0.0400</td>
+      <td>0.4708</td>
+      <td>775000000000</td>
+      <td>0.01</td>
+      <td>1974.0</td>
+      <td>1</td>
+      <td>1093.0</td>
+      <td>2.1807</td>
+      <td>135.92</td>
+      <td>15.89</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5373</th>
+      <td>2.488544e+10</td>
+      <td>8565.21</td>
+      <td>7.41</td>
+      <td>0.00005</td>
+      <td>1.382524e+09</td>
+      <td>0.00</td>
+      <td>419462.62</td>
+      <td>1153968.0</td>
+      <td>84785.0</td>
+      <td>74100000000000</td>
+      <td>...</td>
+      <td>0.5809</td>
+      <td>0.0017</td>
+      <td>10555061484</td>
+      <td>0.02</td>
+      <td>19.0</td>
+      <td>2</td>
+      <td>9.0</td>
+      <td>11.5693</td>
+      <td>18.35</td>
+      <td>-0.59</td>
+    </tr>
+    <tr>
+      <th>5374</th>
+      <td>7.126214e+09</td>
+      <td>3739.76</td>
+      <td>6.18</td>
+      <td>0.00000</td>
+      <td>1.781553e+09</td>
+      <td>0.00</td>
+      <td>437428.60</td>
+      <td>447183.0</td>
+      <td>NaN</td>
+      <td>38800000000000</td>
+      <td>...</td>
+      <td>0.6826</td>
+      <td>0.0000</td>
+      <td>1570000000000</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>2.8601</td>
+      <td>23.46</td>
+      <td>6.00</td>
+    </tr>
+    <tr>
+      <th>5375</th>
+      <td>3.948791e+09</td>
+      <td>24563.46</td>
+      <td>6.73</td>
+      <td>0.00035</td>
+      <td>9.871977e+08</td>
+      <td>0.43</td>
+      <td>3303184.55</td>
+      <td>3154159.0</td>
+      <td>4439.0</td>
+      <td>11900000000000000</td>
+      <td>...</td>
+      <td>1.3758</td>
+      <td>0.0000</td>
+      <td>158603315</td>
+      <td>0.05</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>2.7480</td>
+      <td>93.45</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>5377</th>
+      <td>2.700359e+10</td>
+      <td>23061.73</td>
+      <td>6.36</td>
+      <td>0.00065</td>
+      <td>3.857656e+09</td>
+      <td>0.35</td>
+      <td>1825306.07</td>
+      <td>2395841.0</td>
+      <td>71514.0</td>
+      <td>3960000000000000</td>
+      <td>...</td>
+      <td>0.1300</td>
+      <td>0.0057</td>
+      <td>1786891</td>
+      <td>0.53</td>
+      <td>44.0</td>
+      <td>0</td>
+      <td>28.0</td>
+      <td>4.3710</td>
+      <td>80.30</td>
+      <td>-0.70</td>
+    </tr>
+    <tr>
+      <th>5379</th>
+      <td>3.972951e+09</td>
+      <td>3368.55</td>
+      <td>6.15</td>
+      <td>0.00000</td>
+      <td>1.324317e+09</td>
+      <td>0.00</td>
+      <td>471263.24</td>
+      <td>419675.0</td>
+      <td>1457.0</td>
+      <td>42100000000000</td>
+      <td>...</td>
+      <td>0.4605</td>
+      <td>0.0000</td>
+      <td>5740000000000</td>
+      <td>0.51</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>2.0195</td>
+      <td>19.07</td>
+      <td>0.19</td>
+    </tr>
+  </tbody>
+</table>
+<p>2523 rows × 754 columns</p>
+</div>
+</div>
+</div>
+<section id="impute-missing-values-with-k10-nearest-neighbors" class="level3">
+<h3 class="anchored" data-anchor-id="impute-missing-values-with-k10-nearest-neighbors">impute missing values with k=10 nearest neighbors</h3>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>X_imputed_arr <span class="op">=</span> imputer.fit_transform(X_clean)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>X_imputed <span class="op">=</span> pd.DataFrame(X_imputed_arr, columns<span class="op">=</span>X_clean.columns)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"impute x shape:"</span>, X_imputed.shape)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>X_imputed.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>impute x shape: (5380, 754)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>x001</th>
+      <th>x002</th>
+      <th>x003</th>
+      <th>x004</th>
+      <th>x005</th>
+      <th>x006</th>
+      <th>x007</th>
+      <th>x008</th>
+      <th>x009</th>
+      <th>x010</th>
+      <th>...</th>
+      <th>x756</th>
+      <th>x757</th>
+      <th>x758</th>
+      <th>x759</th>
+      <th>x760</th>
+      <th>x761</th>
+      <th>x762</th>
+      <th>x763</th>
+      <th>x764</th>
+      <th>x765</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9.681860e+10</td>
+      <td>6991.15</td>
+      <td>7.76</td>
+      <td>0.00380</td>
+      <td>5.378811e+09</td>
+      <td>0.31</td>
+      <td>266117.20</td>
+      <td>934577.0</td>
+      <td>14539.0</td>
+      <td>2.690000e+13</td>
+      <td>...</td>
+      <td>1.5707</td>
+      <td>0.0007</td>
+      <td>2.972810e+08</td>
+      <td>0.13</td>
+      <td>5.0</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>8.5127</td>
+      <td>14.28</td>
+      <td>-0.750</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3.304810e+09</td>
+      <td>13914.43</td>
+      <td>5.37</td>
+      <td>0.00015</td>
+      <td>1.652405e+09</td>
+      <td>0.00</td>
+      <td>11927742.92</td>
+      <td>1798051.0</td>
+      <td>1051272.0</td>
+      <td>1.690000e+17</td>
+      <td>...</td>
+      <td>0.1173</td>
+      <td>0.1136</td>
+      <td>3.320000e+12</td>
+      <td>0.08</td>
+      <td>661.0</td>
+      <td>0.0</td>
+      <td>350.0</td>
+      <td>1.5700</td>
+      <td>160.12</td>
+      <td>5.757</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.218944e+10</td>
+      <td>3991.98</td>
+      <td>5.77</td>
+      <td>0.00010</td>
+      <td>2.476111e+09</td>
+      <td>0.00</td>
+      <td>774385.01</td>
+      <td>375738.0</td>
+      <td>144143.0</td>
+      <td>1.350000e+14</td>
+      <td>...</td>
+      <td>0.4582</td>
+      <td>0.0029</td>
+      <td>1.004748e+08</td>
+      <td>0.39</td>
+      <td>39.0</td>
+      <td>2.0</td>
+      <td>18.0</td>
+      <td>9.6800</td>
+      <td>25.06</td>
+      <td>-0.490</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.288000e+10</td>
+      <td>15937.45</td>
+      <td>5.86</td>
+      <td>0.00020</td>
+      <td>2.146667e+09</td>
+      <td>0.00</td>
+      <td>6324375.16</td>
+      <td>1932094.0</td>
+      <td>10055.0</td>
+      <td>3.700000e+16</td>
+      <td>...</td>
+      <td>0.3816</td>
+      <td>0.0000</td>
+      <td>3.480000e+11</td>
+      <td>0.25</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>4.5316</td>
+      <td>117.76</td>
+      <td>1.640</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.063412e+10</td>
+      <td>3621.00</td>
+      <td>7.52</td>
+      <td>0.00060</td>
+      <td>1.392460e+09</td>
+      <td>0.21</td>
+      <td>169860.29</td>
+      <td>474253.0</td>
+      <td>17914.0</td>
+      <td>6.000000e+12</td>
+      <td>...</td>
+      <td>0.0100</td>
+      <td>0.0005</td>
+      <td>1.095466e+08</td>
+      <td>0.11</td>
+      <td>11.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>16.2717</td>
+      <td>5.81</td>
+      <td>-0.420</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 754 columns</p>
+</div>
+</div>
+</div>
+<p>checking to make sure all nan values are gone</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select the rows with NaN values</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>nan_rows_X <span class="op">=</span> X_imputed.loc[X_imputed.isna().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nan_rows_X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Empty DataFrame
+Columns: [x001, x002, x003, x004, x005, x006, x007, x008, x009, x010, x011, x012, x013, x014, x015, x016, x017, x018, x019, x020, x021, x022, x023, x024, x025, x026, x027, x028, x029, x030, x031, x032, x033, x034, x035, x036, x037, x038, x039, x040, x041, x042, x043, x044, x045, x046, x047, x048, x049, x050, x051, x052, x053, x054, x055, x056, x057, x058, x059, x060, x061, x062, x064, x065, x066, x067, x068, x069, x070, x071, x072, x073, x074, x075, x076, x077, x078, x079, x080, x081, x082, x083, x084, x085, x086, x087, x088, x089, x090, x091, x092, x093, x094, x095, x096, x097, x098, x099, x100, x101, ...]
+Index: []
+
+[0 rows x 754 columns]</code></pre>
+</div>
+</div>
+<p>we see there are 0 rows so all NaN values are gone</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>y_train[y_train.isna()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>Series([], Name: y, dtype: int64)</code></pre>
+</div>
+</div>
+<p>Now we see that X_imputed and y_train have no nans so we can create a mars model to see the importance of the features remaining</p>
+</section>
+<section id="mars-for-y_train" class="level3">
+<h3 class="anchored" data-anchor-id="mars-for-y_train">MARS for y_train</h3>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mars1 <span class="op">=</span> Earth(max_degree<span class="op">=</span><span class="dv">1</span>, max_terms<span class="op">=</span><span class="dv">1200</span>, feature_importance_type<span class="op">=</span><span class="st">"rss"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mars1.fit(X_imputed, y_train) <span class="co"># fit to normal y_train</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make predictor df</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>y_train_imp_df <span class="op">=</span> pd.DataFrame(columns <span class="op">=</span> [<span class="st">'predictor'</span>, <span class="st">'importance_y_train'</span>])</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>y_train_imp_df[<span class="st">'importance_y_train'</span>] <span class="op">=</span> <span class="bu">abs</span>(mars1.feature_importances_)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>y_train_imp_df[<span class="st">'predictor'</span>] <span class="op">=</span> X_imputed.columns</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>y_train_imp_df.sort_values(by<span class="op">=</span>[<span class="st">'importance_y_train'</span>], inplace<span class="op">=</span><span class="va">True</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>y_train_imp_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/laineyneild/opt/anaconda3/lib/python3.9/site-packages/pyearth/earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  pruning_passer.run()
+/Users/laineyneild/opt/anaconda3/lib/python3.9/site-packages/pyearth/earth.py:1066: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  coef, resid = np.linalg.lstsq(B, weighted_y[:, i])[0:2]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>predictor</th>
+      <th>importance_y_train</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>351</th>
+      <td>x355</td>
+      <td>0.944541</td>
+    </tr>
+    <tr>
+      <th>518</th>
+      <td>x527</td>
+      <td>0.647963</td>
+    </tr>
+    <tr>
+      <th>552</th>
+      <td>x561</td>
+      <td>0.447287</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>x205</td>
+      <td>0.356236</td>
+    </tr>
+    <tr>
+      <th>414</th>
+      <td>x420</td>
+      <td>0.210716</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>256</th>
+      <td>x260</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>257</th>
+      <td>x261</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>258</th>
+      <td>x262</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>259</th>
+      <td>x263</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>753</th>
+      <td>x765</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>754 rows × 2 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mars-for-y_sqrt" class="level3">
+<h3 class="anchored" data-anchor-id="mars-for-y_sqrt">MARS for y_sqrt</h3>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>y_train_sqrt <span class="op">=</span> np.sqrt(y_train) <span class="co"># transform y</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>mars2 <span class="op">=</span> Earth(max_degree<span class="op">=</span><span class="dv">1</span>, max_terms<span class="op">=</span><span class="dv">1200</span>, feature_importance_type<span class="op">=</span><span class="st">"rss"</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>mars2.fit(X_imputed, y_train_sqrt) <span class="co"># fit to transformed y</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make predictor df</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>y_sqrt_imp_df <span class="op">=</span> pd.DataFrame(columns <span class="op">=</span> [<span class="st">'predictor'</span>, <span class="st">'importance_y_sqrt'</span>])</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>y_sqrt_imp_df[<span class="st">'importance_y_sqrt'</span>] <span class="op">=</span> <span class="bu">abs</span>(mars2.feature_importances_)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>y_sqrt_imp_df[<span class="st">'predictor'</span>] <span class="op">=</span> X_imputed.columns</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>y_sqrt_imp_df.sort_values(by<span class="op">=</span>[<span class="st">'importance_y_sqrt'</span>], inplace<span class="op">=</span><span class="va">True</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>y_sqrt_imp_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/laineyneild/opt/anaconda3/lib/python3.9/site-packages/pyearth/earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  pruning_passer.run()
+/Users/laineyneild/opt/anaconda3/lib/python3.9/site-packages/pyearth/earth.py:1066: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  coef, resid = np.linalg.lstsq(B, weighted_y[:, i])[0:2]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>predictor</th>
+      <th>importance_y_sqrt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>414</th>
+      <td>x420</td>
+      <td>0.514959</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>x118</td>
+      <td>0.309725</td>
+    </tr>
+    <tr>
+      <th>317</th>
+      <td>x321</td>
+      <td>0.235172</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>x106</td>
+      <td>0.174345</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>x114</td>
+      <td>0.130284</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>258</th>
+      <td>x262</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>259</th>
+      <td>x263</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>260</th>
+      <td>x264</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>261</th>
+      <td>x265</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>753</th>
+      <td>x765</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>754 rows × 2 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="drop-all-values-of-0-in-both-df" class="level3">
+<h3 class="anchored" data-anchor-id="drop-all-values-of-0-in-both-df">drop all values of 0 in both df</h3>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>y_train_imp_df <span class="op">=</span> y_train_imp_df[y_train_imp_df.importance_y_train <span class="op">!=</span> <span class="dv">0</span>]</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"length = "</span>, y_train_imp_df.shape[<span class="dv">0</span>])</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>y_train_imp_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>length =  27</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>predictor</th>
+      <th>importance_y_train</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>351</th>
+      <td>x355</td>
+      <td>0.944541</td>
+    </tr>
+    <tr>
+      <th>518</th>
+      <td>x527</td>
+      <td>0.647963</td>
+    </tr>
+    <tr>
+      <th>552</th>
+      <td>x561</td>
+      <td>0.447287</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>x205</td>
+      <td>0.356236</td>
+    </tr>
+    <tr>
+      <th>414</th>
+      <td>x420</td>
+      <td>0.210716</td>
+    </tr>
+    <tr>
+      <th>480</th>
+      <td>x488</td>
+      <td>0.159414</td>
+    </tr>
+    <tr>
+      <th>499</th>
+      <td>x507</td>
+      <td>0.113008</td>
+    </tr>
+    <tr>
+      <th>364</th>
+      <td>x368</td>
+      <td>0.095878</td>
+    </tr>
+    <tr>
+      <th>558</th>
+      <td>x567</td>
+      <td>0.093995</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>x092</td>
+      <td>0.074047</td>
+    </tr>
+    <tr>
+      <th>290</th>
+      <td>x294</td>
+      <td>0.063068</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>x106</td>
+      <td>0.058828</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>x118</td>
+      <td>0.049992</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>x108</td>
+      <td>0.049333</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>x253</td>
+      <td>0.036633</td>
+    </tr>
+    <tr>
+      <th>365</th>
+      <td>x369</td>
+      <td>0.031189</td>
+    </tr>
+    <tr>
+      <th>582</th>
+      <td>x591</td>
+      <td>0.029924</td>
+    </tr>
+    <tr>
+      <th>741</th>
+      <td>x753</td>
+      <td>0.028398</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>x147</td>
+      <td>0.025571</td>
+    </tr>
+    <tr>
+      <th>317</th>
+      <td>x321</td>
+      <td>0.021887</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>x102</td>
+      <td>0.021674</td>
+    </tr>
+    <tr>
+      <th>683</th>
+      <td>x694</td>
+      <td>0.020757</td>
+    </tr>
+    <tr>
+      <th>626</th>
+      <td>x636</td>
+      <td>0.018133</td>
+    </tr>
+    <tr>
+      <th>333</th>
+      <td>x337</td>
+      <td>0.015874</td>
+    </tr>
+    <tr>
+      <th>362</th>
+      <td>x366</td>
+      <td>0.014432</td>
+    </tr>
+    <tr>
+      <th>329</th>
+      <td>x333</td>
+      <td>0.002428</td>
+    </tr>
+    <tr>
+      <th>655</th>
+      <td>x666</td>
+      <td>0.000367</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>y_sqrt_imp_df <span class="op">=</span> y_sqrt_imp_df[y_sqrt_imp_df.importance_y_sqrt <span class="op">!=</span> <span class="dv">0</span>]</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"length = "</span>, y_sqrt_imp_df.shape[<span class="dv">0</span>])</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>y_sqrt_imp_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>length =  19</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>predictor</th>
+      <th>importance_y_sqrt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>414</th>
+      <td>x420</td>
+      <td>0.514959</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>x118</td>
+      <td>0.309725</td>
+    </tr>
+    <tr>
+      <th>317</th>
+      <td>x321</td>
+      <td>0.235172</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>x106</td>
+      <td>0.174345</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>x114</td>
+      <td>0.130284</td>
+    </tr>
+    <tr>
+      <th>333</th>
+      <td>x337</td>
+      <td>0.119798</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>x253</td>
+      <td>0.108349</td>
+    </tr>
+    <tr>
+      <th>558</th>
+      <td>x567</td>
+      <td>0.059864</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>x116</td>
+      <td>0.057156</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>x102</td>
+      <td>0.052633</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>x111</td>
+      <td>0.048413</td>
+    </tr>
+    <tr>
+      <th>552</th>
+      <td>x561</td>
+      <td>0.031429</td>
+    </tr>
+    <tr>
+      <th>282</th>
+      <td>x286</td>
+      <td>0.031299</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>x147</td>
+      <td>0.017614</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>x092</td>
+      <td>0.011574</td>
+    </tr>
+    <tr>
+      <th>362</th>
+      <td>x366</td>
+      <td>0.007239</td>
+    </tr>
+    <tr>
+      <th>518</th>
+      <td>x527</td>
+      <td>0.006596</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>x205</td>
+      <td>0.005462</td>
+    </tr>
+    <tr>
+      <th>499</th>
+      <td>x507</td>
+      <td>0.002391</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="combine-the-2-importance-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="combine-the-2-importance-dataframes">combine the 2 importance dataframes</h3>
+<p><em>prioritize the importance from the sqrt feature importance df</em></p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>merged_imp <span class="op">=</span> pd.merge(y_sqrt_imp_df, y_train_imp_df, on<span class="op">=</span><span class="st">"predictor"</span>, how<span class="op">=</span><span class="st">'outer'</span>, )</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>merged_imp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>predictor</th>
+      <th>importance_y_sqrt</th>
+      <th>importance_y_train</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>x420</td>
+      <td>0.514959</td>
+      <td>0.210716</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>x118</td>
+      <td>0.309725</td>
+      <td>0.049992</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>x321</td>
+      <td>0.235172</td>
+      <td>0.021887</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>x106</td>
+      <td>0.174345</td>
+      <td>0.058828</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>x114</td>
+      <td>0.130284</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>x337</td>
+      <td>0.119798</td>
+      <td>0.015874</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>x253</td>
+      <td>0.108349</td>
+      <td>0.036633</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>x567</td>
+      <td>0.059864</td>
+      <td>0.093995</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>x116</td>
+      <td>0.057156</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>x102</td>
+      <td>0.052633</td>
+      <td>0.021674</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>x111</td>
+      <td>0.048413</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>x561</td>
+      <td>0.031429</td>
+      <td>0.447287</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>x286</td>
+      <td>0.031299</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>x147</td>
+      <td>0.017614</td>
+      <td>0.025571</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>x092</td>
+      <td>0.011574</td>
+      <td>0.074047</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>x366</td>
+      <td>0.007239</td>
+      <td>0.014432</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>x527</td>
+      <td>0.006596</td>
+      <td>0.647963</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>x205</td>
+      <td>0.005462</td>
+      <td>0.356236</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>x507</td>
+      <td>0.002391</td>
+      <td>0.113008</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>x355</td>
+      <td>NaN</td>
+      <td>0.944541</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>x488</td>
+      <td>NaN</td>
+      <td>0.159414</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>x368</td>
+      <td>NaN</td>
+      <td>0.095878</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>x294</td>
+      <td>NaN</td>
+      <td>0.063068</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>x108</td>
+      <td>NaN</td>
+      <td>0.049333</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>x369</td>
+      <td>NaN</td>
+      <td>0.031189</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>x591</td>
+      <td>NaN</td>
+      <td>0.029924</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>x753</td>
+      <td>NaN</td>
+      <td>0.028398</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>x694</td>
+      <td>NaN</td>
+      <td>0.020757</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>x636</td>
+      <td>NaN</td>
+      <td>0.018133</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>x333</td>
+      <td>NaN</td>
+      <td>0.002428</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>x666</td>
+      <td>NaN</td>
+      <td>0.000367</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>importance_lst <span class="op">=</span> [merged_imp.importance_y_sqrt[i] <span class="cf">if</span> <span class="kw">not</span> math.isnan(merged_imp.importance_y_sqrt[i]) <span class="cf">else</span> merged_imp.importance_y_train[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(merged_imp.shape[<span class="dv">0</span>])]</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.DataFrame(columns <span class="op">=</span> [<span class="st">'predictor'</span>, <span class="st">'importance'</span>])</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>merged_df.predictor <span class="op">=</span> merged_imp.predictor</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>merged_df.importance <span class="op">=</span> importance_lst</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>merged_df.sort_values(by<span class="op">=</span>[<span class="st">'importance'</span>], inplace<span class="op">=</span><span class="va">True</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>merged_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>predictor</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19</th>
+      <td>x355</td>
+      <td>0.944541</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>x420</td>
+      <td>0.514959</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>x118</td>
+      <td>0.309725</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>x321</td>
+      <td>0.235172</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>x106</td>
+      <td>0.174345</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>x488</td>
+      <td>0.159414</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>x114</td>
+      <td>0.130284</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>x337</td>
+      <td>0.119798</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>x253</td>
+      <td>0.108349</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>x368</td>
+      <td>0.095878</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>x294</td>
+      <td>0.063068</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>x567</td>
+      <td>0.059864</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>x116</td>
+      <td>0.057156</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>x102</td>
+      <td>0.052633</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>x108</td>
+      <td>0.049333</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>x111</td>
+      <td>0.048413</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>x561</td>
+      <td>0.031429</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>x286</td>
+      <td>0.031299</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>x369</td>
+      <td>0.031189</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>x591</td>
+      <td>0.029924</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>x753</td>
+      <td>0.028398</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>x694</td>
+      <td>0.020757</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>x636</td>
+      <td>0.018133</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>x147</td>
+      <td>0.017614</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>x092</td>
+      <td>0.011574</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>x366</td>
+      <td>0.007239</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>x527</td>
+      <td>0.006596</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>x205</td>
+      <td>0.005462</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>x333</td>
+      <td>0.002428</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>x507</td>
+      <td>0.002391</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>x666</td>
+      <td>0.000367</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="develop-cat-model-using-importance-df" class="level1">
+<h1>Develop CAT model using importance df</h1>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>X_train_thin <span class="op">=</span> X_train.loc[:, merged_df.predictor]</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"shape:"</span>, X_train_thin.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>shape: (5380, 31)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> pd.read_csv(<span class="st">'./data/test.csv'</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>X_test_thin <span class="op">=</span> X_test.loc[:, merged_df.predictor]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>model_cat <span class="op">=</span> CatBoostRegressor(random_state<span class="op">=</span><span class="dv">1</span>).fit(X_train_thin, y_train_sqrt)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> model_cat.predict(X_test_thin)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>preds_sqr <span class="op">=</span> np.square(preds)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'id'</span>: test[<span class="st">'id'</span>], <span class="st">'y'</span>: preds_sqr}</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>data, index<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"shape:"</span>, predictions.shape)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>predictions.to_csv(<span class="st">'./data/predictions.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Learning rate set to 0.053413
+0:  learn: 1.4176552    total: 67ms remaining: 1m 6s
+1:  learn: 1.3972676    total: 69.7ms   remaining: 34.8s
+2:  learn: 1.3788159    total: 72.1ms   remaining: 24s
+3:  learn: 1.3626336    total: 74.8ms   remaining: 18.6s
+4:  learn: 1.3461716    total: 77.5ms   remaining: 15.4s
+5:  learn: 1.3318234    total: 80.2ms   remaining: 13.3s
+6:  learn: 1.3168890    total: 82.8ms   remaining: 11.7s
+7:  learn: 1.3028061    total: 85ms remaining: 10.5s
+8:  learn: 1.2891313    total: 88.3ms   remaining: 9.73s
+9:  learn: 1.2753641    total: 91.7ms   remaining: 9.07s
+10: learn: 1.2649126    total: 94.3ms   remaining: 8.48s
+11: learn: 1.2539342    total: 96.8ms   remaining: 7.97s
+12: learn: 1.2441627    total: 99.3ms   remaining: 7.54s
+13: learn: 1.2343496    total: 102ms    remaining: 7.16s
+14: learn: 1.2261636    total: 104ms    remaining: 6.84s
+15: learn: 1.2171390    total: 107ms    remaining: 6.56s
+16: learn: 1.2087727    total: 109ms    remaining: 6.33s
+17: learn: 1.2002604    total: 112ms    remaining: 6.09s
+18: learn: 1.1929532    total: 114ms    remaining: 5.88s
+19: learn: 1.1859485    total: 116ms    remaining: 5.69s
+20: learn: 1.1783378    total: 118ms    remaining: 5.51s
+21: learn: 1.1716224    total: 121ms    remaining: 5.37s
+22: learn: 1.1647092    total: 123ms    remaining: 5.22s
+23: learn: 1.1583140    total: 125ms    remaining: 5.1s
+24: learn: 1.1528238    total: 128ms    remaining: 4.97s
+25: learn: 1.1473954    total: 130ms    remaining: 4.86s
+26: learn: 1.1427221    total: 132ms    remaining: 4.75s
+27: learn: 1.1371006    total: 134ms    remaining: 4.65s
+28: learn: 1.1320548    total: 136ms    remaining: 4.55s
+29: learn: 1.1277709    total: 138ms    remaining: 4.46s
+30: learn: 1.1228671    total: 140ms    remaining: 4.38s
+31: learn: 1.1180993    total: 142ms    remaining: 4.3s
+32: learn: 1.1146297    total: 145ms    remaining: 4.25s
+33: learn: 1.1109640    total: 148ms    remaining: 4.19s
+34: learn: 1.1075800    total: 150ms    remaining: 4.13s
+35: learn: 1.1032795    total: 152ms    remaining: 4.07s
+36: learn: 1.0998600    total: 154ms    remaining: 4.01s
+37: learn: 1.0971248    total: 157ms    remaining: 3.96s
+38: learn: 1.0943331    total: 159ms    remaining: 3.91s
+39: learn: 1.0910396    total: 161ms    remaining: 3.86s
+40: learn: 1.0876817    total: 163ms    remaining: 3.82s
+41: learn: 1.0847726    total: 165ms    remaining: 3.77s
+42: learn: 1.0815398    total: 167ms    remaining: 3.72s
+43: learn: 1.0789261    total: 169ms    remaining: 3.68s
+44: learn: 1.0757478    total: 171ms    remaining: 3.64s
+45: learn: 1.0725353    total: 174ms    remaining: 3.6s
+46: learn: 1.0697015    total: 176ms    remaining: 3.56s
+47: learn: 1.0671835    total: 178ms    remaining: 3.53s
+48: learn: 1.0643523    total: 180ms    remaining: 3.5s
+49: learn: 1.0622068    total: 183ms    remaining: 3.47s
+50: learn: 1.0600879    total: 185ms    remaining: 3.45s
+51: learn: 1.0577249    total: 187ms    remaining: 3.41s
+52: learn: 1.0550648    total: 190ms    remaining: 3.39s
+53: learn: 1.0525861    total: 192ms    remaining: 3.37s
+54: learn: 1.0500358    total: 195ms    remaining: 3.35s
+55: learn: 1.0478807    total: 199ms    remaining: 3.35s
+56: learn: 1.0458012    total: 201ms    remaining: 3.33s
+57: learn: 1.0440084    total: 205ms    remaining: 3.32s
+58: learn: 1.0418768    total: 209ms    remaining: 3.33s
+59: learn: 1.0400666    total: 211ms    remaining: 3.31s
+60: learn: 1.0378695    total: 213ms    remaining: 3.29s
+61: learn: 1.0358078    total: 216ms    remaining: 3.26s
+62: learn: 1.0331733    total: 218ms    remaining: 3.24s
+63: learn: 1.0309989    total: 220ms    remaining: 3.22s
+64: learn: 1.0294881    total: 222ms    remaining: 3.2s
+65: learn: 1.0279773    total: 224ms    remaining: 3.18s
+66: learn: 1.0263528    total: 227ms    remaining: 3.16s
+67: learn: 1.0248127    total: 229ms    remaining: 3.14s
+68: learn: 1.0228383    total: 232ms    remaining: 3.14s
+69: learn: 1.0210828    total: 235ms    remaining: 3.12s
+70: learn: 1.0191475    total: 237ms    remaining: 3.11s
+71: learn: 1.0177464    total: 240ms    remaining: 3.1s
+72: learn: 1.0166821    total: 243ms    remaining: 3.08s
+73: learn: 1.0154497    total: 245ms    remaining: 3.07s
+74: learn: 1.0139266    total: 247ms    remaining: 3.05s
+75: learn: 1.0115319    total: 249ms    remaining: 3.03s
+76: learn: 1.0099065    total: 252ms    remaining: 3.02s
+77: learn: 1.0082042    total: 255ms    remaining: 3.01s
+78: learn: 1.0065955    total: 257ms    remaining: 3s
+79: learn: 1.0051534    total: 259ms    remaining: 2.98s
+80: learn: 1.0039458    total: 261ms    remaining: 2.97s
+81: learn: 1.0023129    total: 264ms    remaining: 2.95s
+82: learn: 1.0009893    total: 266ms    remaining: 2.93s
+83: learn: 0.9990123    total: 268ms    remaining: 2.92s
+84: learn: 0.9972693    total: 270ms    remaining: 2.91s
+85: learn: 0.9959423    total: 273ms    remaining: 2.9s
+86: learn: 0.9947532    total: 275ms    remaining: 2.88s
+87: learn: 0.9931306    total: 277ms    remaining: 2.87s
+88: learn: 0.9913426    total: 279ms    remaining: 2.85s
+89: learn: 0.9899951    total: 281ms    remaining: 2.84s
+90: learn: 0.9883109    total: 283ms    remaining: 2.83s
+91: learn: 0.9874833    total: 285ms    remaining: 2.81s
+92: learn: 0.9856491    total: 287ms    remaining: 2.8s
+93: learn: 0.9846643    total: 289ms    remaining: 2.79s
+94: learn: 0.9834575    total: 291ms    remaining: 2.77s
+95: learn: 0.9825734    total: 293ms    remaining: 2.76s
+96: learn: 0.9816752    total: 295ms    remaining: 2.75s
+97: learn: 0.9801612    total: 297ms    remaining: 2.73s
+98: learn: 0.9785915    total: 300ms    remaining: 2.73s
+99: learn: 0.9774044    total: 302ms    remaining: 2.71s
+100:    learn: 0.9761485    total: 304ms    remaining: 2.71s
+101:    learn: 0.9753194    total: 307ms    remaining: 2.7s
+102:    learn: 0.9738592    total: 309ms    remaining: 2.69s
+103:    learn: 0.9727873    total: 311ms    remaining: 2.68s
+104:    learn: 0.9715055    total: 313ms    remaining: 2.67s
+105:    learn: 0.9708527    total: 316ms    remaining: 2.67s
+106:    learn: 0.9696721    total: 319ms    remaining: 2.66s
+107:    learn: 0.9688992    total: 321ms    remaining: 2.65s
+108:    learn: 0.9679686    total: 323ms    remaining: 2.64s
+109:    learn: 0.9672646    total: 326ms    remaining: 2.63s
+110:    learn: 0.9658437    total: 328ms    remaining: 2.63s
+111:    learn: 0.9641352    total: 330ms    remaining: 2.62s
+112:    learn: 0.9633989    total: 333ms    remaining: 2.61s
+113:    learn: 0.9623963    total: 335ms    remaining: 2.6s
+114:    learn: 0.9615763    total: 337ms    remaining: 2.59s
+115:    learn: 0.9608027    total: 339ms    remaining: 2.58s
+116:    learn: 0.9595296    total: 341ms    remaining: 2.58s
+117:    learn: 0.9583402    total: 343ms    remaining: 2.57s
+118:    learn: 0.9574797    total: 345ms    remaining: 2.56s
+119:    learn: 0.9557766    total: 348ms    remaining: 2.55s
+120:    learn: 0.9545079    total: 350ms    remaining: 2.54s
+121:    learn: 0.9536353    total: 352ms    remaining: 2.53s
+122:    learn: 0.9530726    total: 354ms    remaining: 2.53s
+123:    learn: 0.9520741    total: 356ms    remaining: 2.52s
+124:    learn: 0.9511620    total: 358ms    remaining: 2.51s
+125:    learn: 0.9496945    total: 360ms    remaining: 2.5s
+126:    learn: 0.9482780    total: 363ms    remaining: 2.49s
+127:    learn: 0.9467885    total: 365ms    remaining: 2.49s
+128:    learn: 0.9460761    total: 367ms    remaining: 2.48s
+129:    learn: 0.9446424    total: 369ms    remaining: 2.47s
+130:    learn: 0.9436791    total: 371ms    remaining: 2.46s
+131:    learn: 0.9422513    total: 373ms    remaining: 2.45s
+132:    learn: 0.9412953    total: 375ms    remaining: 2.45s
+133:    learn: 0.9404539    total: 378ms    remaining: 2.44s
+134:    learn: 0.9391833    total: 380ms    remaining: 2.43s
+135:    learn: 0.9380828    total: 382ms    remaining: 2.43s
+136:    learn: 0.9371060    total: 384ms    remaining: 2.42s
+137:    learn: 0.9365061    total: 386ms    remaining: 2.41s
+138:    learn: 0.9358796    total: 389ms    remaining: 2.41s
+139:    learn: 0.9349381    total: 392ms    remaining: 2.41s
+140:    learn: 0.9339144    total: 395ms    remaining: 2.4s
+141:    learn: 0.9333224    total: 397ms    remaining: 2.4s
+142:    learn: 0.9324928    total: 399ms    remaining: 2.39s
+143:    learn: 0.9317757    total: 401ms    remaining: 2.39s
+144:    learn: 0.9310637    total: 404ms    remaining: 2.38s
+145:    learn: 0.9300738    total: 406ms    remaining: 2.37s
+146:    learn: 0.9291976    total: 408ms    remaining: 2.37s
+147:    learn: 0.9283422    total: 410ms    remaining: 2.36s
+148:    learn: 0.9271096    total: 413ms    remaining: 2.36s
+149:    learn: 0.9263865    total: 415ms    remaining: 2.35s
+150:    learn: 0.9250756    total: 418ms    remaining: 2.35s
+151:    learn: 0.9238242    total: 420ms    remaining: 2.34s
+152:    learn: 0.9229695    total: 422ms    remaining: 2.33s
+153:    learn: 0.9220443    total: 424ms    remaining: 2.33s
+154:    learn: 0.9212503    total: 426ms    remaining: 2.32s
+155:    learn: 0.9210080    total: 428ms    remaining: 2.32s
+156:    learn: 0.9202654    total: 430ms    remaining: 2.31s
+157:    learn: 0.9194577    total: 433ms    remaining: 2.31s
+158:    learn: 0.9185536    total: 435ms    remaining: 2.3s
+159:    learn: 0.9176725    total: 437ms    remaining: 2.29s
+160:    learn: 0.9164557    total: 439ms    remaining: 2.29s
+161:    learn: 0.9156106    total: 441ms    remaining: 2.28s
+162:    learn: 0.9143279    total: 444ms    remaining: 2.28s
+163:    learn: 0.9135826    total: 446ms    remaining: 2.27s
+164:    learn: 0.9129284    total: 448ms    remaining: 2.27s
+165:    learn: 0.9119914    total: 450ms    remaining: 2.26s
+166:    learn: 0.9115898    total: 453ms    remaining: 2.26s
+167:    learn: 0.9108202    total: 455ms    remaining: 2.25s
+168:    learn: 0.9099358    total: 457ms    remaining: 2.25s
+169:    learn: 0.9090385    total: 459ms    remaining: 2.24s
+170:    learn: 0.9081823    total: 461ms    remaining: 2.24s
+171:    learn: 0.9077121    total: 463ms    remaining: 2.23s
+172:    learn: 0.9065487    total: 465ms    remaining: 2.22s
+173:    learn: 0.9058388    total: 467ms    remaining: 2.22s
+174:    learn: 0.9049171    total: 469ms    remaining: 2.21s
+175:    learn: 0.9041303    total: 471ms    remaining: 2.21s
+176:    learn: 0.9030737    total: 473ms    remaining: 2.2s
+177:    learn: 0.9021466    total: 476ms    remaining: 2.2s
+178:    learn: 0.9009718    total: 478ms    remaining: 2.19s
+179:    learn: 0.9006750    total: 480ms    remaining: 2.19s
+180:    learn: 0.8996740    total: 482ms    remaining: 2.18s
+181:    learn: 0.8987987    total: 484ms    remaining: 2.17s
+182:    learn: 0.8987226    total: 486ms    remaining: 2.17s
+183:    learn: 0.8977774    total: 488ms    remaining: 2.16s
+184:    learn: 0.8969092    total: 490ms    remaining: 2.16s
+185:    learn: 0.8960617    total: 492ms    remaining: 2.15s
+186:    learn: 0.8951371    total: 495ms    remaining: 2.15s
+187:    learn: 0.8946142    total: 496ms    remaining: 2.14s
+188:    learn: 0.8935364    total: 498ms    remaining: 2.14s
+189:    learn: 0.8921906    total: 500ms    remaining: 2.13s
+190:    learn: 0.8913442    total: 502ms    remaining: 2.13s
+191:    learn: 0.8905548    total: 504ms    remaining: 2.12s
+192:    learn: 0.8896962    total: 507ms    remaining: 2.12s
+193:    learn: 0.8884861    total: 509ms    remaining: 2.12s
+194:    learn: 0.8880143    total: 512ms    remaining: 2.11s
+195:    learn: 0.8874417    total: 514ms    remaining: 2.11s
+196:    learn: 0.8864321    total: 516ms    remaining: 2.1s
+197:    learn: 0.8858100    total: 517ms    remaining: 2.1s
+198:    learn: 0.8848962    total: 519ms    remaining: 2.09s
+199:    learn: 0.8839281    total: 522ms    remaining: 2.09s
+200:    learn: 0.8828233    total: 523ms    remaining: 2.08s
+201:    learn: 0.8819671    total: 526ms    remaining: 2.08s
+202:    learn: 0.8809064    total: 528ms    remaining: 2.07s
+203:    learn: 0.8798809    total: 530ms    remaining: 2.07s
+204:    learn: 0.8789696    total: 532ms    remaining: 2.06s
+205:    learn: 0.8782257    total: 534ms    remaining: 2.06s
+206:    learn: 0.8772164    total: 536ms    remaining: 2.05s
+207:    learn: 0.8767874    total: 538ms    remaining: 2.05s
+208:    learn: 0.8758781    total: 541ms    remaining: 2.05s
+209:    learn: 0.8751027    total: 543ms    remaining: 2.04s
+210:    learn: 0.8744294    total: 546ms    remaining: 2.04s
+211:    learn: 0.8735312    total: 548ms    remaining: 2.04s
+212:    learn: 0.8725416    total: 550ms    remaining: 2.03s
+213:    learn: 0.8719172    total: 552ms    remaining: 2.03s
+214:    learn: 0.8712587    total: 554ms    remaining: 2.02s
+215:    learn: 0.8705368    total: 556ms    remaining: 2.02s
+216:    learn: 0.8702474    total: 559ms    remaining: 2.02s
+217:    learn: 0.8697124    total: 561ms    remaining: 2.01s
+218:    learn: 0.8688418    total: 563ms    remaining: 2.01s
+219:    learn: 0.8682213    total: 565ms    remaining: 2s
+220:    learn: 0.8676677    total: 567ms    remaining: 2s
+221:    learn: 0.8670157    total: 570ms    remaining: 2s
+222:    learn: 0.8665609    total: 572ms    remaining: 1.99s
+223:    learn: 0.8661527    total: 574ms    remaining: 1.99s
+224:    learn: 0.8653075    total: 576ms    remaining: 1.98s
+225:    learn: 0.8644165    total: 579ms    remaining: 1.98s
+226:    learn: 0.8636815    total: 584ms    remaining: 1.99s
+227:    learn: 0.8633038    total: 587ms    remaining: 1.99s
+228:    learn: 0.8623942    total: 590ms    remaining: 1.99s
+229:    learn: 0.8614419    total: 592ms    remaining: 1.98s
+230:    learn: 0.8611684    total: 595ms    remaining: 1.98s
+231:    learn: 0.8605088    total: 597ms    remaining: 1.98s
+232:    learn: 0.8601063    total: 599ms    remaining: 1.97s
+233:    learn: 0.8594326    total: 601ms    remaining: 1.97s
+234:    learn: 0.8581736    total: 604ms    remaining: 1.97s
+235:    learn: 0.8569708    total: 606ms    remaining: 1.96s
+236:    learn: 0.8560553    total: 609ms    remaining: 1.96s
+237:    learn: 0.8552908    total: 611ms    remaining: 1.96s
+238:    learn: 0.8545810    total: 613ms    remaining: 1.95s
+239:    learn: 0.8540965    total: 615ms    remaining: 1.95s
+240:    learn: 0.8536596    total: 617ms    remaining: 1.94s
+241:    learn: 0.8521974    total: 619ms    remaining: 1.94s
+242:    learn: 0.8513272    total: 621ms    remaining: 1.93s
+243:    learn: 0.8510742    total: 623ms    remaining: 1.93s
+244:    learn: 0.8500890    total: 625ms    remaining: 1.93s
+245:    learn: 0.8493953    total: 627ms    remaining: 1.92s
+246:    learn: 0.8490100    total: 629ms    remaining: 1.92s
+247:    learn: 0.8484734    total: 631ms    remaining: 1.91s
+248:    learn: 0.8475115    total: 633ms    remaining: 1.91s
+249:    learn: 0.8467985    total: 635ms    remaining: 1.91s
+250:    learn: 0.8460948    total: 637ms    remaining: 1.9s
+251:    learn: 0.8448633    total: 640ms    remaining: 1.9s
+252:    learn: 0.8439750    total: 641ms    remaining: 1.89s
+253:    learn: 0.8433289    total: 643ms    remaining: 1.89s
+254:    learn: 0.8425201    total: 645ms    remaining: 1.89s
+255:    learn: 0.8419010    total: 647ms    remaining: 1.88s
+256:    learn: 0.8413704    total: 650ms    remaining: 1.88s
+257:    learn: 0.8405786    total: 651ms    remaining: 1.87s
+258:    learn: 0.8397456    total: 654ms    remaining: 1.87s
+259:    learn: 0.8391585    total: 656ms    remaining: 1.87s
+260:    learn: 0.8382799    total: 658ms    remaining: 1.86s
+261:    learn: 0.8373685    total: 660ms    remaining: 1.86s
+262:    learn: 0.8367189    total: 662ms    remaining: 1.85s
+263:    learn: 0.8362157    total: 663ms    remaining: 1.85s
+264:    learn: 0.8353058    total: 666ms    remaining: 1.85s
+265:    learn: 0.8347389    total: 668ms    remaining: 1.84s
+266:    learn: 0.8341483    total: 670ms    remaining: 1.84s
+267:    learn: 0.8336868    total: 672ms    remaining: 1.83s
+268:    learn: 0.8330986    total: 674ms    remaining: 1.83s
+269:    learn: 0.8322496    total: 676ms    remaining: 1.83s
+270:    learn: 0.8322029    total: 677ms    remaining: 1.82s
+271:    learn: 0.8321179    total: 679ms    remaining: 1.82s
+272:    learn: 0.8315957    total: 681ms    remaining: 1.81s
+273:    learn: 0.8307067    total: 685ms    remaining: 1.81s
+274:    learn: 0.8296197    total: 687ms    remaining: 1.81s
+275:    learn: 0.8284953    total: 689ms    remaining: 1.81s
+276:    learn: 0.8278819    total: 691ms    remaining: 1.8s
+277:    learn: 0.8271554    total: 694ms    remaining: 1.8s
+278:    learn: 0.8261807    total: 697ms    remaining: 1.8s
+279:    learn: 0.8255220    total: 701ms    remaining: 1.8s
+280:    learn: 0.8249673    total: 704ms    remaining: 1.8s
+281:    learn: 0.8238441    total: 706ms    remaining: 1.8s
+282:    learn: 0.8229327    total: 708ms    remaining: 1.79s
+283:    learn: 0.8228842    total: 710ms    remaining: 1.79s
+284:    learn: 0.8222020    total: 713ms    remaining: 1.79s
+285:    learn: 0.8218500    total: 715ms    remaining: 1.78s
+286:    learn: 0.8210835    total: 717ms    remaining: 1.78s
+287:    learn: 0.8203802    total: 719ms    remaining: 1.78s
+288:    learn: 0.8195931    total: 721ms    remaining: 1.77s
+289:    learn: 0.8188340    total: 723ms    remaining: 1.77s
+290:    learn: 0.8175687    total: 725ms    remaining: 1.77s
+291:    learn: 0.8168094    total: 727ms    remaining: 1.76s
+292:    learn: 0.8160243    total: 730ms    remaining: 1.76s
+293:    learn: 0.8159777    total: 731ms    remaining: 1.76s
+294:    learn: 0.8159022    total: 733ms    remaining: 1.75s
+295:    learn: 0.8151999    total: 736ms    remaining: 1.75s
+296:    learn: 0.8151635    total: 737ms    remaining: 1.75s
+297:    learn: 0.8142590    total: 739ms    remaining: 1.74s
+298:    learn: 0.8141963    total: 741ms    remaining: 1.74s
+299:    learn: 0.8137268    total: 743ms    remaining: 1.73s
+300:    learn: 0.8136930    total: 745ms    remaining: 1.73s
+301:    learn: 0.8129220    total: 747ms    remaining: 1.73s
+302:    learn: 0.8123947    total: 750ms    remaining: 1.72s
+303:    learn: 0.8123368    total: 752ms    remaining: 1.72s
+304:    learn: 0.8114944    total: 754ms    remaining: 1.72s
+305:    learn: 0.8108109    total: 756ms    remaining: 1.71s
+306:    learn: 0.8101999    total: 757ms    remaining: 1.71s
+307:    learn: 0.8091522    total: 759ms    remaining: 1.71s
+308:    learn: 0.8085331    total: 762ms    remaining: 1.7s
+309:    learn: 0.8079628    total: 764ms    remaining: 1.7s
+310:    learn: 0.8072611    total: 767ms    remaining: 1.7s
+311:    learn: 0.8065179    total: 768ms    remaining: 1.69s
+312:    learn: 0.8059521    total: 770ms    remaining: 1.69s
+313:    learn: 0.8056068    total: 773ms    remaining: 1.69s
+314:    learn: 0.8048266    total: 776ms    remaining: 1.69s
+315:    learn: 0.8041370    total: 778ms    remaining: 1.68s
+316:    learn: 0.8041010    total: 780ms    remaining: 1.68s
+317:    learn: 0.8031895    total: 783ms    remaining: 1.68s
+318:    learn: 0.8024132    total: 786ms    remaining: 1.68s
+319:    learn: 0.8018782    total: 788ms    remaining: 1.67s
+320:    learn: 0.8011636    total: 790ms    remaining: 1.67s
+321:    learn: 0.8005376    total: 792ms    remaining: 1.67s
+322:    learn: 0.8004732    total: 795ms    remaining: 1.67s
+323:    learn: 0.8004391    total: 797ms    remaining: 1.66s
+324:    learn: 0.8004064    total: 799ms    remaining: 1.66s
+325:    learn: 0.7997513    total: 801ms    remaining: 1.66s
+326:    learn: 0.7989514    total: 803ms    remaining: 1.65s
+327:    learn: 0.7983037    total: 805ms    remaining: 1.65s
+328:    learn: 0.7977589    total: 807ms    remaining: 1.65s
+329:    learn: 0.7977233    total: 809ms    remaining: 1.64s
+330:    learn: 0.7976904    total: 811ms    remaining: 1.64s
+331:    learn: 0.7967860    total: 814ms    remaining: 1.64s
+332:    learn: 0.7967292    total: 815ms    remaining: 1.63s
+333:    learn: 0.7967004    total: 817ms    remaining: 1.63s
+334:    learn: 0.7966698    total: 819ms    remaining: 1.63s
+335:    learn: 0.7966172    total: 821ms    remaining: 1.62s
+336:    learn: 0.7965671    total: 823ms    remaining: 1.62s
+337:    learn: 0.7965166    total: 825ms    remaining: 1.61s
+338:    learn: 0.7957582    total: 827ms    remaining: 1.61s
+339:    learn: 0.7954063    total: 829ms    remaining: 1.61s
+340:    learn: 0.7951177    total: 831ms    remaining: 1.6s
+341:    learn: 0.7944499    total: 833ms    remaining: 1.6s
+342:    learn: 0.7939103    total: 835ms    remaining: 1.6s
+343:    learn: 0.7935920    total: 837ms    remaining: 1.59s
+344:    learn: 0.7932512    total: 839ms    remaining: 1.59s
+345:    learn: 0.7928085    total: 841ms    remaining: 1.59s
+346:    learn: 0.7923425    total: 843ms    remaining: 1.59s
+347:    learn: 0.7923172    total: 846ms    remaining: 1.58s
+348:    learn: 0.7914444    total: 848ms    remaining: 1.58s
+349:    learn: 0.7910304    total: 850ms    remaining: 1.58s
+350:    learn: 0.7902405    total: 852ms    remaining: 1.58s
+351:    learn: 0.7896491    total: 854ms    remaining: 1.57s
+352:    learn: 0.7890438    total: 857ms    remaining: 1.57s
+353:    learn: 0.7887867    total: 859ms    remaining: 1.57s
+354:    learn: 0.7882312    total: 861ms    remaining: 1.56s
+355:    learn: 0.7875337    total: 863ms    remaining: 1.56s
+356:    learn: 0.7867766    total: 865ms    remaining: 1.56s
+357:    learn: 0.7860730    total: 867ms    remaining: 1.55s
+358:    learn: 0.7852952    total: 869ms    remaining: 1.55s
+359:    learn: 0.7845626    total: 871ms    remaining: 1.55s
+360:    learn: 0.7833693    total: 873ms    remaining: 1.54s
+361:    learn: 0.7829693    total: 875ms    remaining: 1.54s
+362:    learn: 0.7822852    total: 877ms    remaining: 1.54s
+363:    learn: 0.7819457    total: 879ms    remaining: 1.54s
+364:    learn: 0.7816298    total: 881ms    remaining: 1.53s
+365:    learn: 0.7805464    total: 883ms    remaining: 1.53s
+366:    learn: 0.7796439    total: 885ms    remaining: 1.53s
+367:    learn: 0.7790296    total: 887ms    remaining: 1.52s
+368:    learn: 0.7784350    total: 890ms    remaining: 1.52s
+369:    learn: 0.7778143    total: 892ms    remaining: 1.52s
+370:    learn: 0.7774405    total: 894ms    remaining: 1.51s
+371:    learn: 0.7769374    total: 896ms    remaining: 1.51s
+372:    learn: 0.7762675    total: 898ms    remaining: 1.51s
+373:    learn: 0.7759636    total: 900ms    remaining: 1.51s
+374:    learn: 0.7751638    total: 902ms    remaining: 1.5s
+375:    learn: 0.7745712    total: 904ms    remaining: 1.5s
+376:    learn: 0.7739613    total: 906ms    remaining: 1.5s
+377:    learn: 0.7735661    total: 908ms    remaining: 1.49s
+378:    learn: 0.7729263    total: 911ms    remaining: 1.49s
+379:    learn: 0.7725471    total: 913ms    remaining: 1.49s
+380:    learn: 0.7720478    total: 914ms    remaining: 1.49s
+381:    learn: 0.7716155    total: 917ms    remaining: 1.48s
+382:    learn: 0.7711060    total: 919ms    remaining: 1.48s
+383:    learn: 0.7706858    total: 921ms    remaining: 1.48s
+384:    learn: 0.7701198    total: 923ms    remaining: 1.47s
+385:    learn: 0.7696903    total: 925ms    remaining: 1.47s
+386:    learn: 0.7696225    total: 927ms    remaining: 1.47s
+387:    learn: 0.7689627    total: 929ms    remaining: 1.47s
+388:    learn: 0.7688338    total: 931ms    remaining: 1.46s
+389:    learn: 0.7682693    total: 933ms    remaining: 1.46s
+390:    learn: 0.7678270    total: 935ms    remaining: 1.46s
+391:    learn: 0.7671106    total: 937ms    remaining: 1.45s
+392:    learn: 0.7665910    total: 939ms    remaining: 1.45s
+393:    learn: 0.7661272    total: 941ms    remaining: 1.45s
+394:    learn: 0.7654137    total: 943ms    remaining: 1.44s
+395:    learn: 0.7650523    total: 945ms    remaining: 1.44s
+396:    learn: 0.7644308    total: 947ms    remaining: 1.44s
+397:    learn: 0.7636977    total: 949ms    remaining: 1.43s
+398:    learn: 0.7632514    total: 951ms    remaining: 1.43s
+399:    learn: 0.7627194    total: 953ms    remaining: 1.43s
+400:    learn: 0.7620505    total: 956ms    remaining: 1.43s
+401:    learn: 0.7614460    total: 958ms    remaining: 1.42s
+402:    learn: 0.7607319    total: 960ms    remaining: 1.42s
+403:    learn: 0.7600147    total: 962ms    remaining: 1.42s
+404:    learn: 0.7595904    total: 964ms    remaining: 1.42s
+405:    learn: 0.7590795    total: 966ms    remaining: 1.41s
+406:    learn: 0.7582321    total: 969ms    remaining: 1.41s
+407:    learn: 0.7579115    total: 972ms    remaining: 1.41s
+408:    learn: 0.7575517    total: 974ms    remaining: 1.41s
+409:    learn: 0.7572389    total: 976ms    remaining: 1.4s
+410:    learn: 0.7568023    total: 978ms    remaining: 1.4s
+411:    learn: 0.7564432    total: 980ms    remaining: 1.4s
+412:    learn: 0.7557148    total: 982ms    remaining: 1.4s
+413:    learn: 0.7547062    total: 985ms    remaining: 1.39s
+414:    learn: 0.7538302    total: 987ms    remaining: 1.39s
+415:    learn: 0.7530170    total: 989ms    remaining: 1.39s
+416:    learn: 0.7525792    total: 991ms    remaining: 1.39s
+417:    learn: 0.7520451    total: 993ms    remaining: 1.38s
+418:    learn: 0.7514991    total: 996ms    remaining: 1.38s
+419:    learn: 0.7512038    total: 998ms    remaining: 1.38s
+420:    learn: 0.7505702    total: 1s   remaining: 1.38s
+421:    learn: 0.7498150    total: 1s   remaining: 1.37s
+422:    learn: 0.7493427    total: 1s   remaining: 1.37s
+423:    learn: 0.7490278    total: 1.01s    remaining: 1.37s
+424:    learn: 0.7486333    total: 1.01s    remaining: 1.36s
+425:    learn: 0.7481453    total: 1.01s    remaining: 1.36s
+426:    learn: 0.7476592    total: 1.01s    remaining: 1.36s
+427:    learn: 0.7472867    total: 1.01s    remaining: 1.36s
+428:    learn: 0.7466713    total: 1.02s    remaining: 1.35s
+429:    learn: 0.7461772    total: 1.02s    remaining: 1.35s
+430:    learn: 0.7456937    total: 1.02s    remaining: 1.35s
+431:    learn: 0.7453076    total: 1.02s    remaining: 1.35s
+432:    learn: 0.7445924    total: 1.03s    remaining: 1.34s
+433:    learn: 0.7437034    total: 1.03s    remaining: 1.34s
+434:    learn: 0.7430827    total: 1.03s    remaining: 1.34s
+435:    learn: 0.7425947    total: 1.03s    remaining: 1.33s
+436:    learn: 0.7419508    total: 1.03s    remaining: 1.33s
+437:    learn: 0.7411260    total: 1.04s    remaining: 1.33s
+438:    learn: 0.7406620    total: 1.04s    remaining: 1.33s
+439:    learn: 0.7402693    total: 1.04s    remaining: 1.32s
+440:    learn: 0.7397022    total: 1.04s    remaining: 1.32s
+441:    learn: 0.7390764    total: 1.04s    remaining: 1.32s
+442:    learn: 0.7381356    total: 1.05s    remaining: 1.32s
+443:    learn: 0.7375795    total: 1.05s    remaining: 1.31s
+444:    learn: 0.7368274    total: 1.05s    remaining: 1.31s
+445:    learn: 0.7361527    total: 1.05s    remaining: 1.31s
+446:    learn: 0.7357947    total: 1.06s    remaining: 1.31s
+447:    learn: 0.7353414    total: 1.06s    remaining: 1.3s
+448:    learn: 0.7350239    total: 1.06s    remaining: 1.3s
+449:    learn: 0.7345275    total: 1.06s    remaining: 1.3s
+450:    learn: 0.7338757    total: 1.07s    remaining: 1.3s
+451:    learn: 0.7331642    total: 1.07s    remaining: 1.3s
+452:    learn: 0.7326663    total: 1.07s    remaining: 1.29s
+453:    learn: 0.7323563    total: 1.07s    remaining: 1.29s
+454:    learn: 0.7321761    total: 1.07s    remaining: 1.29s
+455:    learn: 0.7317066    total: 1.08s    remaining: 1.28s
+456:    learn: 0.7313168    total: 1.08s    remaining: 1.28s
+457:    learn: 0.7307917    total: 1.08s    remaining: 1.28s
+458:    learn: 0.7304690    total: 1.09s    remaining: 1.28s
+459:    learn: 0.7299241    total: 1.09s    remaining: 1.28s
+460:    learn: 0.7295433    total: 1.09s    remaining: 1.27s
+461:    learn: 0.7291163    total: 1.09s    remaining: 1.27s
+462:    learn: 0.7287572    total: 1.09s    remaining: 1.27s
+463:    learn: 0.7282244    total: 1.1s remaining: 1.27s
+464:    learn: 0.7276369    total: 1.1s remaining: 1.27s
+465:    learn: 0.7272346    total: 1.1s remaining: 1.26s
+466:    learn: 0.7268176    total: 1.1s remaining: 1.26s
+467:    learn: 0.7264771    total: 1.11s    remaining: 1.26s
+468:    learn: 0.7256367    total: 1.11s    remaining: 1.25s
+469:    learn: 0.7256212    total: 1.11s    remaining: 1.25s
+470:    learn: 0.7252857    total: 1.11s    remaining: 1.25s
+471:    learn: 0.7251249    total: 1.11s    remaining: 1.25s
+472:    learn: 0.7246250    total: 1.12s    remaining: 1.25s
+473:    learn: 0.7241887    total: 1.12s    remaining: 1.24s
+474:    learn: 0.7234785    total: 1.12s    remaining: 1.24s
+475:    learn: 0.7231668    total: 1.12s    remaining: 1.24s
+476:    learn: 0.7222823    total: 1.13s    remaining: 1.24s
+477:    learn: 0.7220201    total: 1.13s    remaining: 1.23s
+478:    learn: 0.7216371    total: 1.13s    remaining: 1.23s
+479:    learn: 0.7210328    total: 1.13s    remaining: 1.23s
+480:    learn: 0.7203839    total: 1.14s    remaining: 1.23s
+481:    learn: 0.7199839    total: 1.14s    remaining: 1.22s
+482:    learn: 0.7194814    total: 1.14s    remaining: 1.22s
+483:    learn: 0.7190691    total: 1.15s    remaining: 1.22s
+484:    learn: 0.7186185    total: 1.15s    remaining: 1.22s
+485:    learn: 0.7180279    total: 1.15s    remaining: 1.22s
+486:    learn: 0.7174846    total: 1.16s    remaining: 1.22s
+487:    learn: 0.7170965    total: 1.16s    remaining: 1.22s
+488:    learn: 0.7167643    total: 1.16s    remaining: 1.22s
+489:    learn: 0.7164636    total: 1.17s    remaining: 1.22s
+490:    learn: 0.7160709    total: 1.17s    remaining: 1.21s
+491:    learn: 0.7156325    total: 1.17s    remaining: 1.21s
+492:    learn: 0.7150380    total: 1.17s    remaining: 1.21s
+493:    learn: 0.7143500    total: 1.18s    remaining: 1.21s
+494:    learn: 0.7138531    total: 1.18s    remaining: 1.2s
+495:    learn: 0.7135396    total: 1.18s    remaining: 1.2s
+496:    learn: 0.7130718    total: 1.18s    remaining: 1.2s
+497:    learn: 0.7128367    total: 1.19s    remaining: 1.2s
+498:    learn: 0.7124081    total: 1.19s    remaining: 1.19s
+499:    learn: 0.7118363    total: 1.19s    remaining: 1.19s
+500:    learn: 0.7114384    total: 1.19s    remaining: 1.19s
+501:    learn: 0.7109044    total: 1.2s remaining: 1.19s
+502:    learn: 0.7105619    total: 1.2s remaining: 1.18s
+503:    learn: 0.7099017    total: 1.2s remaining: 1.18s
+504:    learn: 0.7094478    total: 1.2s remaining: 1.18s
+505:    learn: 0.7090068    total: 1.2s remaining: 1.17s
+506:    learn: 0.7085108    total: 1.21s    remaining: 1.17s
+507:    learn: 0.7080224    total: 1.21s    remaining: 1.17s
+508:    learn: 0.7074718    total: 1.21s    remaining: 1.17s
+509:    learn: 0.7068338    total: 1.21s    remaining: 1.17s
+510:    learn: 0.7063983    total: 1.22s    remaining: 1.16s
+511:    learn: 0.7058305    total: 1.22s    remaining: 1.16s
+512:    learn: 0.7052952    total: 1.22s    remaining: 1.16s
+513:    learn: 0.7047103    total: 1.22s    remaining: 1.16s
+514:    learn: 0.7038420    total: 1.22s    remaining: 1.15s
+515:    learn: 0.7033943    total: 1.23s    remaining: 1.15s
+516:    learn: 0.7030622    total: 1.23s    remaining: 1.15s
+517:    learn: 0.7027850    total: 1.23s    remaining: 1.15s
+518:    learn: 0.7021658    total: 1.23s    remaining: 1.14s
+519:    learn: 0.7017120    total: 1.23s    remaining: 1.14s
+520:    learn: 0.7012675    total: 1.24s    remaining: 1.14s
+521:    learn: 0.7009599    total: 1.24s    remaining: 1.14s
+522:    learn: 0.7003373    total: 1.24s    remaining: 1.13s
+523:    learn: 0.6998039    total: 1.24s    remaining: 1.13s
+524:    learn: 0.6988804    total: 1.25s    remaining: 1.13s
+525:    learn: 0.6983900    total: 1.25s    remaining: 1.12s
+526:    learn: 0.6974762    total: 1.25s    remaining: 1.12s
+527:    learn: 0.6969227    total: 1.25s    remaining: 1.12s
+528:    learn: 0.6964806    total: 1.25s    remaining: 1.12s
+529:    learn: 0.6960308    total: 1.26s    remaining: 1.11s
+530:    learn: 0.6955631    total: 1.26s    remaining: 1.11s
+531:    learn: 0.6953482    total: 1.26s    remaining: 1.11s
+532:    learn: 0.6952176    total: 1.26s    remaining: 1.11s
+533:    learn: 0.6948216    total: 1.26s    remaining: 1.1s
+534:    learn: 0.6942418    total: 1.27s    remaining: 1.1s
+535:    learn: 0.6936228    total: 1.27s    remaining: 1.1s
+536:    learn: 0.6927706    total: 1.27s    remaining: 1.1s
+537:    learn: 0.6921715    total: 1.27s    remaining: 1.09s
+538:    learn: 0.6917515    total: 1.28s    remaining: 1.09s
+539:    learn: 0.6909737    total: 1.28s    remaining: 1.09s
+540:    learn: 0.6906212    total: 1.28s    remaining: 1.09s
+541:    learn: 0.6902435    total: 1.28s    remaining: 1.09s
+542:    learn: 0.6894845    total: 1.29s    remaining: 1.08s
+543:    learn: 0.6891331    total: 1.29s    remaining: 1.08s
+544:    learn: 0.6885896    total: 1.29s    remaining: 1.08s
+545:    learn: 0.6878666    total: 1.29s    remaining: 1.08s
+546:    learn: 0.6874130    total: 1.3s remaining: 1.07s
+547:    learn: 0.6870865    total: 1.3s remaining: 1.07s
+548:    learn: 0.6865579    total: 1.3s remaining: 1.07s
+549:    learn: 0.6865419    total: 1.3s remaining: 1.07s
+550:    learn: 0.6860820    total: 1.31s    remaining: 1.06s
+551:    learn: 0.6860667    total: 1.31s    remaining: 1.06s
+552:    learn: 0.6854395    total: 1.31s    remaining: 1.06s
+553:    learn: 0.6850711    total: 1.31s    remaining: 1.06s
+554:    learn: 0.6847503    total: 1.32s    remaining: 1.05s
+555:    learn: 0.6842307    total: 1.32s    remaining: 1.05s
+556:    learn: 0.6835028    total: 1.32s    remaining: 1.05s
+557:    learn: 0.6829260    total: 1.32s    remaining: 1.05s
+558:    learn: 0.6825578    total: 1.32s    remaining: 1.04s
+559:    learn: 0.6819932    total: 1.33s    remaining: 1.04s
+560:    learn: 0.6815090    total: 1.33s    remaining: 1.04s
+561:    learn: 0.6811729    total: 1.33s    remaining: 1.04s
+562:    learn: 0.6808677    total: 1.33s    remaining: 1.03s
+563:    learn: 0.6802115    total: 1.33s    remaining: 1.03s
+564:    learn: 0.6799172    total: 1.34s    remaining: 1.03s
+565:    learn: 0.6796123    total: 1.34s    remaining: 1.03s
+566:    learn: 0.6792490    total: 1.34s    remaining: 1.02s
+567:    learn: 0.6787982    total: 1.34s    remaining: 1.02s
+568:    learn: 0.6784414    total: 1.35s    remaining: 1.02s
+569:    learn: 0.6781314    total: 1.35s    remaining: 1.02s
+570:    learn: 0.6775494    total: 1.36s    remaining: 1.02s
+571:    learn: 0.6770403    total: 1.36s    remaining: 1.02s
+572:    learn: 0.6766407    total: 1.36s    remaining: 1.02s
+573:    learn: 0.6762004    total: 1.37s    remaining: 1.01s
+574:    learn: 0.6756961    total: 1.37s    remaining: 1.01s
+575:    learn: 0.6754176    total: 1.38s    remaining: 1.01s
+576:    learn: 0.6750225    total: 1.38s    remaining: 1.01s
+577:    learn: 0.6745426    total: 1.38s    remaining: 1.01s
+578:    learn: 0.6742064    total: 1.38s    remaining: 1s
+579:    learn: 0.6739374    total: 1.39s    remaining: 1s
+580:    learn: 0.6735491    total: 1.39s    remaining: 1s
+581:    learn: 0.6734559    total: 1.39s    remaining: 998ms
+582:    learn: 0.6730270    total: 1.39s    remaining: 996ms
+583:    learn: 0.6725879    total: 1.39s    remaining: 993ms
+584:    learn: 0.6719923    total: 1.4s remaining: 991ms
+585:    learn: 0.6717494    total: 1.4s remaining: 988ms
+586:    learn: 0.6714345    total: 1.4s remaining: 986ms
+587:    learn: 0.6708303    total: 1.4s remaining: 983ms
+588:    learn: 0.6703111    total: 1.41s    remaining: 981ms
+589:    learn: 0.6698519    total: 1.41s    remaining: 978ms
+590:    learn: 0.6692934    total: 1.41s    remaining: 976ms
+591:    learn: 0.6689165    total: 1.41s    remaining: 973ms
+592:    learn: 0.6683748    total: 1.41s    remaining: 971ms
+593:    learn: 0.6679276    total: 1.42s    remaining: 968ms
+594:    learn: 0.6673351    total: 1.42s    remaining: 966ms
+595:    learn: 0.6669802    total: 1.42s    remaining: 963ms
+596:    learn: 0.6664482    total: 1.42s    remaining: 961ms
+597:    learn: 0.6659793    total: 1.43s    remaining: 958ms
+598:    learn: 0.6655388    total: 1.43s    remaining: 956ms
+599:    learn: 0.6652441    total: 1.43s    remaining: 954ms
+600:    learn: 0.6648717    total: 1.43s    remaining: 951ms
+601:    learn: 0.6642093    total: 1.43s    remaining: 949ms
+602:    learn: 0.6637292    total: 1.44s    remaining: 946ms
+603:    learn: 0.6633895    total: 1.44s    remaining: 944ms
+604:    learn: 0.6629769    total: 1.44s    remaining: 941ms
+605:    learn: 0.6624249    total: 1.44s    remaining: 939ms
+606:    learn: 0.6621024    total: 1.45s    remaining: 937ms
+607:    learn: 0.6615005    total: 1.45s    remaining: 935ms
+608:    learn: 0.6609620    total: 1.45s    remaining: 933ms
+609:    learn: 0.6606059    total: 1.46s    remaining: 931ms
+610:    learn: 0.6600673    total: 1.46s    remaining: 928ms
+611:    learn: 0.6595218    total: 1.46s    remaining: 926ms
+612:    learn: 0.6592654    total: 1.46s    remaining: 924ms
+613:    learn: 0.6589027    total: 1.47s    remaining: 922ms
+614:    learn: 0.6585172    total: 1.47s    remaining: 919ms
+615:    learn: 0.6580625    total: 1.47s    remaining: 917ms
+616:    learn: 0.6576811    total: 1.47s    remaining: 914ms
+617:    learn: 0.6573007    total: 1.47s    remaining: 912ms
+618:    learn: 0.6570225    total: 1.48s    remaining: 909ms
+619:    learn: 0.6565118    total: 1.48s    remaining: 907ms
+620:    learn: 0.6561792    total: 1.48s    remaining: 905ms
+621:    learn: 0.6554046    total: 1.48s    remaining: 902ms
+622:    learn: 0.6549238    total: 1.49s    remaining: 900ms
+623:    learn: 0.6545550    total: 1.49s    remaining: 897ms
+624:    learn: 0.6540653    total: 1.49s    remaining: 895ms
+625:    learn: 0.6535075    total: 1.49s    remaining: 893ms
+626:    learn: 0.6529839    total: 1.5s remaining: 890ms
+627:    learn: 0.6526380    total: 1.5s remaining: 888ms
+628:    learn: 0.6523890    total: 1.5s remaining: 886ms
+629:    learn: 0.6519580    total: 1.5s remaining: 883ms
+630:    learn: 0.6513666    total: 1.5s remaining: 880ms
+631:    learn: 0.6506843    total: 1.51s    remaining: 878ms
+632:    learn: 0.6503965    total: 1.51s    remaining: 875ms
+633:    learn: 0.6498520    total: 1.51s    remaining: 873ms
+634:    learn: 0.6494679    total: 1.51s    remaining: 870ms
+635:    learn: 0.6490132    total: 1.51s    remaining: 868ms
+636:    learn: 0.6486473    total: 1.52s    remaining: 865ms
+637:    learn: 0.6481717    total: 1.52s    remaining: 862ms
+638:    learn: 0.6476247    total: 1.52s    remaining: 860ms
+639:    learn: 0.6471645    total: 1.52s    remaining: 857ms
+640:    learn: 0.6468575    total: 1.52s    remaining: 855ms
+641:    learn: 0.6464342    total: 1.53s    remaining: 852ms
+642:    learn: 0.6460391    total: 1.53s    remaining: 850ms
+643:    learn: 0.6456089    total: 1.53s    remaining: 847ms
+644:    learn: 0.6453802    total: 1.53s    remaining: 845ms
+645:    learn: 0.6450252    total: 1.54s    remaining: 842ms
+646:    learn: 0.6445476    total: 1.54s    remaining: 840ms
+647:    learn: 0.6442196    total: 1.54s    remaining: 837ms
+648:    learn: 0.6438635    total: 1.54s    remaining: 834ms
+649:    learn: 0.6431198    total: 1.54s    remaining: 832ms
+650:    learn: 0.6428677    total: 1.55s    remaining: 830ms
+651:    learn: 0.6427184    total: 1.55s    remaining: 828ms
+652:    learn: 0.6425559    total: 1.55s    remaining: 825ms
+653:    learn: 0.6422235    total: 1.55s    remaining: 823ms
+654:    learn: 0.6418504    total: 1.56s    remaining: 820ms
+655:    learn: 0.6415441    total: 1.56s    remaining: 818ms
+656:    learn: 0.6408107    total: 1.56s    remaining: 816ms
+657:    learn: 0.6404757    total: 1.56s    remaining: 813ms
+658:    learn: 0.6397638    total: 1.57s    remaining: 810ms
+659:    learn: 0.6393182    total: 1.57s    remaining: 808ms
+660:    learn: 0.6389733    total: 1.57s    remaining: 805ms
+661:    learn: 0.6385556    total: 1.57s    remaining: 803ms
+662:    learn: 0.6382021    total: 1.57s    remaining: 800ms
+663:    learn: 0.6378099    total: 1.58s    remaining: 798ms
+664:    learn: 0.6371764    total: 1.58s    remaining: 795ms
+665:    learn: 0.6367777    total: 1.58s    remaining: 793ms
+666:    learn: 0.6363361    total: 1.58s    remaining: 790ms
+667:    learn: 0.6358851    total: 1.58s    remaining: 788ms
+668:    learn: 0.6354712    total: 1.59s    remaining: 785ms
+669:    learn: 0.6352182    total: 1.59s    remaining: 783ms
+670:    learn: 0.6348485    total: 1.59s    remaining: 780ms
+671:    learn: 0.6345033    total: 1.59s    remaining: 778ms
+672:    learn: 0.6340774    total: 1.59s    remaining: 775ms
+673:    learn: 0.6335621    total: 1.6s remaining: 773ms
+674:    learn: 0.6329727    total: 1.6s remaining: 770ms
+675:    learn: 0.6326571    total: 1.6s remaining: 768ms
+676:    learn: 0.6323233    total: 1.6s remaining: 765ms
+677:    learn: 0.6319691    total: 1.6s remaining: 762ms
+678:    learn: 0.6316533    total: 1.61s    remaining: 760ms
+679:    learn: 0.6310685    total: 1.61s    remaining: 758ms
+680:    learn: 0.6307995    total: 1.61s    remaining: 755ms
+681:    learn: 0.6304658    total: 1.61s    remaining: 753ms
+682:    learn: 0.6300435    total: 1.62s    remaining: 750ms
+683:    learn: 0.6293796    total: 1.62s    remaining: 748ms
+684:    learn: 0.6289704    total: 1.62s    remaining: 746ms
+685:    learn: 0.6286062    total: 1.62s    remaining: 743ms
+686:    learn: 0.6280782    total: 1.63s    remaining: 741ms
+687:    learn: 0.6273090    total: 1.63s    remaining: 739ms
+688:    learn: 0.6269724    total: 1.63s    remaining: 736ms
+689:    learn: 0.6266207    total: 1.63s    remaining: 734ms
+690:    learn: 0.6260814    total: 1.63s    remaining: 731ms
+691:    learn: 0.6258622    total: 1.64s    remaining: 729ms
+692:    learn: 0.6253615    total: 1.64s    remaining: 727ms
+693:    learn: 0.6250195    total: 1.64s    remaining: 724ms
+694:    learn: 0.6245900    total: 1.64s    remaining: 722ms
+695:    learn: 0.6243965    total: 1.65s    remaining: 719ms
+696:    learn: 0.6238651    total: 1.65s    remaining: 717ms
+697:    learn: 0.6234402    total: 1.65s    remaining: 714ms
+698:    learn: 0.6229911    total: 1.65s    remaining: 712ms
+699:    learn: 0.6226700    total: 1.66s    remaining: 710ms
+700:    learn: 0.6224551    total: 1.66s    remaining: 708ms
+701:    learn: 0.6223083    total: 1.66s    remaining: 705ms
+702:    learn: 0.6219843    total: 1.66s    remaining: 703ms
+703:    learn: 0.6216563    total: 1.67s    remaining: 700ms
+704:    learn: 0.6211842    total: 1.67s    remaining: 698ms
+705:    learn: 0.6209826    total: 1.67s    remaining: 696ms
+706:    learn: 0.6206068    total: 1.67s    remaining: 693ms
+707:    learn: 0.6203876    total: 1.67s    remaining: 691ms
+708:    learn: 0.6199666    total: 1.68s    remaining: 688ms
+709:    learn: 0.6195540    total: 1.68s    remaining: 686ms
+710:    learn: 0.6191992    total: 1.68s    remaining: 683ms
+711:    learn: 0.6187613    total: 1.68s    remaining: 681ms
+712:    learn: 0.6183832    total: 1.69s    remaining: 678ms
+713:    learn: 0.6180316    total: 1.69s    remaining: 676ms
+714:    learn: 0.6176361    total: 1.69s    remaining: 674ms
+715:    learn: 0.6170648    total: 1.69s    remaining: 671ms
+716:    learn: 0.6168021    total: 1.69s    remaining: 669ms
+717:    learn: 0.6165755    total: 1.7s remaining: 666ms
+718:    learn: 0.6160626    total: 1.7s remaining: 664ms
+719:    learn: 0.6156102    total: 1.7s remaining: 661ms
+720:    learn: 0.6152925    total: 1.7s remaining: 659ms
+721:    learn: 0.6148353    total: 1.7s remaining: 656ms
+722:    learn: 0.6144534    total: 1.71s    remaining: 654ms
+723:    learn: 0.6138057    total: 1.71s    remaining: 651ms
+724:    learn: 0.6134934    total: 1.71s    remaining: 649ms
+725:    learn: 0.6130404    total: 1.71s    remaining: 646ms
+726:    learn: 0.6126839    total: 1.71s    remaining: 644ms
+727:    learn: 0.6120114    total: 1.72s    remaining: 641ms
+728:    learn: 0.6113454    total: 1.72s    remaining: 639ms
+729:    learn: 0.6107111    total: 1.72s    remaining: 637ms
+730:    learn: 0.6103889    total: 1.72s    remaining: 634ms
+731:    learn: 0.6098809    total: 1.73s    remaining: 632ms
+732:    learn: 0.6094498    total: 1.73s    remaining: 629ms
+733:    learn: 0.6091129    total: 1.73s    remaining: 627ms
+734:    learn: 0.6089276    total: 1.73s    remaining: 624ms
+735:    learn: 0.6085739    total: 1.73s    remaining: 622ms
+736:    learn: 0.6083418    total: 1.74s    remaining: 620ms
+737:    learn: 0.6081254    total: 1.74s    remaining: 618ms
+738:    learn: 0.6078758    total: 1.74s    remaining: 616ms
+739:    learn: 0.6075517    total: 1.75s    remaining: 613ms
+740:    learn: 0.6073661    total: 1.75s    remaining: 611ms
+741:    learn: 0.6071633    total: 1.75s    remaining: 609ms
+742:    learn: 0.6069050    total: 1.75s    remaining: 606ms
+743:    learn: 0.6065152    total: 1.75s    remaining: 604ms
+744:    learn: 0.6062686    total: 1.76s    remaining: 601ms
+745:    learn: 0.6057992    total: 1.76s    remaining: 599ms
+746:    learn: 0.6053209    total: 1.76s    remaining: 597ms
+747:    learn: 0.6049886    total: 1.76s    remaining: 594ms
+748:    learn: 0.6047441    total: 1.77s    remaining: 592ms
+749:    learn: 0.6045744    total: 1.77s    remaining: 590ms
+750:    learn: 0.6042160    total: 1.77s    remaining: 587ms
+751:    learn: 0.6037501    total: 1.77s    remaining: 585ms
+752:    learn: 0.6034518    total: 1.77s    remaining: 582ms
+753:    learn: 0.6030570    total: 1.78s    remaining: 580ms
+754:    learn: 0.6028158    total: 1.78s    remaining: 578ms
+755:    learn: 0.6022957    total: 1.78s    remaining: 575ms
+756:    learn: 0.6019235    total: 1.78s    remaining: 573ms
+757:    learn: 0.6015483    total: 1.79s    remaining: 571ms
+758:    learn: 0.6011787    total: 1.79s    remaining: 568ms
+759:    learn: 0.6008616    total: 1.79s    remaining: 566ms
+760:    learn: 0.6004950    total: 1.79s    remaining: 563ms
+761:    learn: 0.6002275    total: 1.79s    remaining: 561ms
+762:    learn: 0.5997282    total: 1.8s remaining: 559ms
+763:    learn: 0.5993267    total: 1.8s remaining: 556ms
+764:    learn: 0.5990636    total: 1.8s remaining: 554ms
+765:    learn: 0.5986191    total: 1.8s remaining: 551ms
+766:    learn: 0.5983682    total: 1.81s    remaining: 549ms
+767:    learn: 0.5976984    total: 1.81s    remaining: 546ms
+768:    learn: 0.5974939    total: 1.81s    remaining: 544ms
+769:    learn: 0.5971855    total: 1.81s    remaining: 541ms
+770:    learn: 0.5968061    total: 1.81s    remaining: 539ms
+771:    learn: 0.5964402    total: 1.82s    remaining: 537ms
+772:    learn: 0.5960462    total: 1.82s    remaining: 534ms
+773:    learn: 0.5956249    total: 1.82s    remaining: 532ms
+774:    learn: 0.5953216    total: 1.82s    remaining: 529ms
+775:    learn: 0.5950272    total: 1.82s    remaining: 527ms
+776:    learn: 0.5946684    total: 1.83s    remaining: 525ms
+777:    learn: 0.5943519    total: 1.83s    remaining: 522ms
+778:    learn: 0.5941169    total: 1.83s    remaining: 520ms
+779:    learn: 0.5935943    total: 1.83s    remaining: 517ms
+780:    learn: 0.5931969    total: 1.83s    remaining: 515ms
+781:    learn: 0.5929916    total: 1.84s    remaining: 512ms
+782:    learn: 0.5926890    total: 1.84s    remaining: 510ms
+783:    learn: 0.5924469    total: 1.84s    remaining: 507ms
+784:    learn: 0.5921791    total: 1.84s    remaining: 505ms
+785:    learn: 0.5919191    total: 1.85s    remaining: 503ms
+786:    learn: 0.5916727    total: 1.85s    remaining: 500ms
+787:    learn: 0.5914188    total: 1.85s    remaining: 498ms
+788:    learn: 0.5910083    total: 1.85s    remaining: 496ms
+789:    learn: 0.5906078    total: 1.85s    remaining: 493ms
+790:    learn: 0.5902511    total: 1.86s    remaining: 491ms
+791:    learn: 0.5897807    total: 1.86s    remaining: 488ms
+792:    learn: 0.5894819    total: 1.86s    remaining: 486ms
+793:    learn: 0.5892809    total: 1.86s    remaining: 483ms
+794:    learn: 0.5887724    total: 1.86s    remaining: 481ms
+795:    learn: 0.5884709    total: 1.87s    remaining: 479ms
+796:    learn: 0.5883007    total: 1.87s    remaining: 476ms
+797:    learn: 0.5878823    total: 1.87s    remaining: 474ms
+798:    learn: 0.5876271    total: 1.87s    remaining: 472ms
+799:    learn: 0.5871408    total: 1.88s    remaining: 469ms
+800:    learn: 0.5866491    total: 1.88s    remaining: 467ms
+801:    learn: 0.5861995    total: 1.88s    remaining: 464ms
+802:    learn: 0.5859575    total: 1.88s    remaining: 462ms
+803:    learn: 0.5855888    total: 1.89s    remaining: 460ms
+804:    learn: 0.5851794    total: 1.89s    remaining: 457ms
+805:    learn: 0.5849248    total: 1.89s    remaining: 455ms
+806:    learn: 0.5844818    total: 1.89s    remaining: 452ms
+807:    learn: 0.5842283    total: 1.89s    remaining: 450ms
+808:    learn: 0.5837986    total: 1.9s remaining: 448ms
+809:    learn: 0.5834478    total: 1.9s remaining: 445ms
+810:    learn: 0.5830930    total: 1.9s remaining: 443ms
+811:    learn: 0.5826364    total: 1.9s remaining: 440ms
+812:    learn: 0.5822906    total: 1.9s remaining: 438ms
+813:    learn: 0.5816932    total: 1.91s    remaining: 436ms
+814:    learn: 0.5812981    total: 1.91s    remaining: 433ms
+815:    learn: 0.5811038    total: 1.91s    remaining: 431ms
+816:    learn: 0.5808030    total: 1.91s    remaining: 428ms
+817:    learn: 0.5805490    total: 1.91s    remaining: 426ms
+818:    learn: 0.5801849    total: 1.92s    remaining: 424ms
+819:    learn: 0.5797226    total: 1.92s    remaining: 421ms
+820:    learn: 0.5793970    total: 1.92s    remaining: 419ms
+821:    learn: 0.5789011    total: 1.92s    remaining: 417ms
+822:    learn: 0.5783553    total: 1.93s    remaining: 414ms
+823:    learn: 0.5780471    total: 1.93s    remaining: 412ms
+824:    learn: 0.5777880    total: 1.93s    remaining: 410ms
+825:    learn: 0.5774924    total: 1.93s    remaining: 407ms
+826:    learn: 0.5770773    total: 1.94s    remaining: 405ms
+827:    learn: 0.5767180    total: 1.94s    remaining: 403ms
+828:    learn: 0.5762670    total: 1.94s    remaining: 401ms
+829:    learn: 0.5759161    total: 1.94s    remaining: 398ms
+830:    learn: 0.5755187    total: 1.95s    remaining: 396ms
+831:    learn: 0.5753092    total: 1.95s    remaining: 393ms
+832:    learn: 0.5748288    total: 1.95s    remaining: 391ms
+833:    learn: 0.5744950    total: 1.95s    remaining: 389ms
+834:    learn: 0.5741020    total: 1.96s    remaining: 386ms
+835:    learn: 0.5736994    total: 1.96s    remaining: 384ms
+836:    learn: 0.5733406    total: 1.96s    remaining: 382ms
+837:    learn: 0.5730133    total: 1.96s    remaining: 379ms
+838:    learn: 0.5727330    total: 1.96s    remaining: 377ms
+839:    learn: 0.5722784    total: 1.97s    remaining: 374ms
+840:    learn: 0.5719318    total: 1.97s    remaining: 372ms
+841:    learn: 0.5714740    total: 1.97s    remaining: 370ms
+842:    learn: 0.5712033    total: 1.97s    remaining: 367ms
+843:    learn: 0.5708693    total: 1.97s    remaining: 365ms
+844:    learn: 0.5705429    total: 1.98s    remaining: 363ms
+845:    learn: 0.5702638    total: 1.98s    remaining: 360ms
+846:    learn: 0.5698866    total: 1.98s    remaining: 358ms
+847:    learn: 0.5695344    total: 1.98s    remaining: 356ms
+848:    learn: 0.5693060    total: 1.99s    remaining: 353ms
+849:    learn: 0.5689472    total: 1.99s    remaining: 351ms
+850:    learn: 0.5684534    total: 1.99s    remaining: 348ms
+851:    learn: 0.5682235    total: 1.99s    remaining: 346ms
+852:    learn: 0.5680008    total: 1.99s    remaining: 344ms
+853:    learn: 0.5677630    total: 2s   remaining: 341ms
+854:    learn: 0.5675418    total: 2s   remaining: 339ms
+855:    learn: 0.5673701    total: 2s   remaining: 337ms
+856:    learn: 0.5668726    total: 2s   remaining: 334ms
+857:    learn: 0.5665956    total: 2s   remaining: 332ms
+858:    learn: 0.5663955    total: 2.01s    remaining: 330ms
+859:    learn: 0.5661957    total: 2.01s    remaining: 327ms
+860:    learn: 0.5657242    total: 2.01s    remaining: 325ms
+861:    learn: 0.5653581    total: 2.02s    remaining: 323ms
+862:    learn: 0.5651797    total: 2.02s    remaining: 320ms
+863:    learn: 0.5648745    total: 2.02s    remaining: 318ms
+864:    learn: 0.5646652    total: 2.02s    remaining: 316ms
+865:    learn: 0.5643738    total: 2.02s    remaining: 313ms
+866:    learn: 0.5639703    total: 2.03s    remaining: 311ms
+867:    learn: 0.5635558    total: 2.03s    remaining: 309ms
+868:    learn: 0.5631483    total: 2.03s    remaining: 306ms
+869:    learn: 0.5627243    total: 2.03s    remaining: 304ms
+870:    learn: 0.5623647    total: 2.04s    remaining: 302ms
+871:    learn: 0.5619970    total: 2.04s    remaining: 299ms
+872:    learn: 0.5616959    total: 2.04s    remaining: 297ms
+873:    learn: 0.5613115    total: 2.04s    remaining: 295ms
+874:    learn: 0.5610363    total: 2.04s    remaining: 292ms
+875:    learn: 0.5605932    total: 2.05s    remaining: 290ms
+876:    learn: 0.5602576    total: 2.05s    remaining: 287ms
+877:    learn: 0.5600200    total: 2.05s    remaining: 285ms
+878:    learn: 0.5597500    total: 2.05s    remaining: 283ms
+879:    learn: 0.5594320    total: 2.06s    remaining: 280ms
+880:    learn: 0.5588670    total: 2.06s    remaining: 278ms
+881:    learn: 0.5585474    total: 2.06s    remaining: 276ms
+882:    learn: 0.5583156    total: 2.06s    remaining: 273ms
+883:    learn: 0.5580981    total: 2.06s    remaining: 271ms
+884:    learn: 0.5578267    total: 2.07s    remaining: 269ms
+885:    learn: 0.5574047    total: 2.07s    remaining: 266ms
+886:    learn: 0.5572235    total: 2.07s    remaining: 264ms
+887:    learn: 0.5569298    total: 2.07s    remaining: 262ms
+888:    learn: 0.5564611    total: 2.08s    remaining: 259ms
+889:    learn: 0.5562282    total: 2.08s    remaining: 257ms
+890:    learn: 0.5560230    total: 2.08s    remaining: 254ms
+891:    learn: 0.5556461    total: 2.08s    remaining: 252ms
+892:    learn: 0.5550825    total: 2.08s    remaining: 250ms
+893:    learn: 0.5548763    total: 2.09s    remaining: 248ms
+894:    learn: 0.5547146    total: 2.09s    remaining: 245ms
+895:    learn: 0.5545898    total: 2.09s    remaining: 243ms
+896:    learn: 0.5543259    total: 2.1s remaining: 241ms
+897:    learn: 0.5541493    total: 2.1s remaining: 238ms
+898:    learn: 0.5537576    total: 2.1s remaining: 236ms
+899:    learn: 0.5535010    total: 2.1s remaining: 234ms
+900:    learn: 0.5532015    total: 2.1s remaining: 231ms
+901:    learn: 0.5526926    total: 2.11s    remaining: 229ms
+902:    learn: 0.5525068    total: 2.11s    remaining: 227ms
+903:    learn: 0.5524978    total: 2.11s    remaining: 224ms
+904:    learn: 0.5521135    total: 2.11s    remaining: 222ms
+905:    learn: 0.5517585    total: 2.12s    remaining: 220ms
+906:    learn: 0.5515816    total: 2.12s    remaining: 217ms
+907:    learn: 0.5512667    total: 2.12s    remaining: 215ms
+908:    learn: 0.5509316    total: 2.12s    remaining: 213ms
+909:    learn: 0.5507330    total: 2.13s    remaining: 210ms
+910:    learn: 0.5503828    total: 2.13s    remaining: 208ms
+911:    learn: 0.5501857    total: 2.13s    remaining: 206ms
+912:    learn: 0.5497829    total: 2.14s    remaining: 204ms
+913:    learn: 0.5497726    total: 2.14s    remaining: 201ms
+914:    learn: 0.5492998    total: 2.14s    remaining: 199ms
+915:    learn: 0.5490196    total: 2.14s    remaining: 196ms
+916:    learn: 0.5488286    total: 2.14s    remaining: 194ms
+917:    learn: 0.5485137    total: 2.15s    remaining: 192ms
+918:    learn: 0.5483079    total: 2.15s    remaining: 190ms
+919:    learn: 0.5480098    total: 2.15s    remaining: 187ms
+920:    learn: 0.5476557    total: 2.15s    remaining: 185ms
+921:    learn: 0.5473671    total: 2.16s    remaining: 183ms
+922:    learn: 0.5470681    total: 2.16s    remaining: 180ms
+923:    learn: 0.5468227    total: 2.16s    remaining: 178ms
+924:    learn: 0.5465085    total: 2.17s    remaining: 176ms
+925:    learn: 0.5460015    total: 2.17s    remaining: 173ms
+926:    learn: 0.5457823    total: 2.17s    remaining: 171ms
+927:    learn: 0.5455820    total: 2.17s    remaining: 169ms
+928:    learn: 0.5452370    total: 2.17s    remaining: 166ms
+929:    learn: 0.5451089    total: 2.18s    remaining: 164ms
+930:    learn: 0.5448086    total: 2.18s    remaining: 162ms
+931:    learn: 0.5445245    total: 2.18s    remaining: 159ms
+932:    learn: 0.5442107    total: 2.18s    remaining: 157ms
+933:    learn: 0.5439421    total: 2.19s    remaining: 154ms
+934:    learn: 0.5434109    total: 2.19s    remaining: 152ms
+935:    learn: 0.5430254    total: 2.19s    remaining: 150ms
+936:    learn: 0.5427046    total: 2.19s    remaining: 147ms
+937:    learn: 0.5423809    total: 2.19s    remaining: 145ms
+938:    learn: 0.5419524    total: 2.2s remaining: 143ms
+939:    learn: 0.5416207    total: 2.2s remaining: 140ms
+940:    learn: 0.5413176    total: 2.2s remaining: 138ms
+941:    learn: 0.5409717    total: 2.2s remaining: 136ms
+942:    learn: 0.5406062    total: 2.21s    remaining: 133ms
+943:    learn: 0.5403368    total: 2.21s    remaining: 131ms
+944:    learn: 0.5400132    total: 2.21s    remaining: 129ms
+945:    learn: 0.5397659    total: 2.21s    remaining: 126ms
+946:    learn: 0.5397587    total: 2.21s    remaining: 124ms
+947:    learn: 0.5394717    total: 2.22s    remaining: 122ms
+948:    learn: 0.5391543    total: 2.22s    remaining: 119ms
+949:    learn: 0.5388776    total: 2.22s    remaining: 117ms
+950:    learn: 0.5387217    total: 2.22s    remaining: 115ms
+951:    learn: 0.5384875    total: 2.23s    remaining: 112ms
+952:    learn: 0.5381604    total: 2.23s    remaining: 110ms
+953:    learn: 0.5379527    total: 2.23s    remaining: 108ms
+954:    learn: 0.5376277    total: 2.23s    remaining: 105ms
+955:    learn: 0.5373459    total: 2.24s    remaining: 103ms
+956:    learn: 0.5370723    total: 2.24s    remaining: 101ms
+957:    learn: 0.5367714    total: 2.24s    remaining: 98.2ms
+958:    learn: 0.5364317    total: 2.24s    remaining: 96ms
+959:    learn: 0.5362385    total: 2.25s    remaining: 93.6ms
+960:    learn: 0.5358368    total: 2.25s    remaining: 91.3ms
+961:    learn: 0.5356380    total: 2.25s    remaining: 88.9ms
+962:    learn: 0.5353760    total: 2.25s    remaining: 86.6ms
+963:    learn: 0.5351073    total: 2.25s    remaining: 84.2ms
+964:    learn: 0.5349410    total: 2.26s    remaining: 81.9ms
+965:    learn: 0.5345833    total: 2.26s    remaining: 79.5ms
+966:    learn: 0.5343148    total: 2.26s    remaining: 77.2ms
+967:    learn: 0.5340386    total: 2.26s    remaining: 74.9ms
+968:    learn: 0.5340284    total: 2.27s    remaining: 72.5ms
+969:    learn: 0.5336974    total: 2.27s    remaining: 70.2ms
+970:    learn: 0.5334727    total: 2.27s    remaining: 67.8ms
+971:    learn: 0.5332007    total: 2.27s    remaining: 65.5ms
+972:    learn: 0.5328784    total: 2.27s    remaining: 63.1ms
+973:    learn: 0.5325433    total: 2.28s    remaining: 60.8ms
+974:    learn: 0.5322296    total: 2.28s    remaining: 58.4ms
+975:    learn: 0.5320010    total: 2.28s    remaining: 56.1ms
+976:    learn: 0.5317360    total: 2.28s    remaining: 53.8ms
+977:    learn: 0.5317293    total: 2.29s    remaining: 51.4ms
+978:    learn: 0.5315379    total: 2.29s    remaining: 49.1ms
+979:    learn: 0.5313256    total: 2.29s    remaining: 46.7ms
+980:    learn: 0.5310956    total: 2.29s    remaining: 44.4ms
+981:    learn: 0.5308887    total: 2.29s    remaining: 42.1ms
+982:    learn: 0.5306803    total: 2.3s remaining: 39.7ms
+983:    learn: 0.5304333    total: 2.3s remaining: 37.4ms
+984:    learn: 0.5301256    total: 2.3s remaining: 35ms
+985:    learn: 0.5298683    total: 2.3s remaining: 32.7ms
+986:    learn: 0.5294982    total: 2.31s    remaining: 30.4ms
+987:    learn: 0.5292117    total: 2.31s    remaining: 28ms
+988:    learn: 0.5290108    total: 2.31s    remaining: 25.7ms
+989:    learn: 0.5287458    total: 2.31s    remaining: 23.4ms
+990:    learn: 0.5286003    total: 2.31s    remaining: 21ms
+991:    learn: 0.5282836    total: 2.32s    remaining: 18.7ms
+992:    learn: 0.5277559    total: 2.32s    remaining: 16.3ms
+993:    learn: 0.5274124    total: 2.32s    remaining: 14ms
+994:    learn: 0.5269562    total: 2.33s    remaining: 11.7ms
+995:    learn: 0.5267238    total: 2.33s    remaining: 9.35ms
+996:    learn: 0.5265719    total: 2.33s    remaining: 7.01ms
+997:    learn: 0.5263253    total: 2.33s    remaining: 4.67ms
+998:    learn: 0.5260031    total: 2.33s    remaining: 2.34ms
+999:    learn: 0.5258040    total: 2.34s    remaining: 0us
+shape: (4403, 2)</code></pre>
+</div>
+</div>
+</section>
+<section id="rmse-8.71" class="level1">
+<h1><em>rmse = 8.71</em></h1>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
